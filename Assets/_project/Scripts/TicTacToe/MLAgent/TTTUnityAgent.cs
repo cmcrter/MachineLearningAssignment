@@ -55,6 +55,11 @@ namespace ML.TTT
                 {
                     gameState.MoveTaken(index);
                 }
+                else
+                {
+                    //Get random free square and use it
+                    gameState.MoveTaken(-1);
+                }
             }
         }
 
