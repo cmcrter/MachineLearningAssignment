@@ -7,6 +7,7 @@
 // Brief: The overall game manager which runs Tic Tac Toe
 //////////////////////////////////////////////////////////// 
 
+using System;
 using UnityEngine;
 
 namespace ML.TTT
@@ -29,6 +30,17 @@ namespace ML.TTT
         [SerializeField]
         private TTTBoardInteraction BoardUI;
 
+        [SerializeField]
+        GAMEMODE mode = GAMEMODE.PvP;
+
+        [SerializeField]
+        GameObject MLAgentX;
+        iAgent agentScriptX;
+
+        [SerializeField]
+        GameObject MLAgentO;
+        iAgent agentScriptO;
+
         #endregion
 
         #region Unity Methods
@@ -37,29 +49,107 @@ namespace ML.TTT
         {
             BoardUI = BoardUI ?? FindObjectOfType<TTTBoardInteraction>();
             BoardValues = new TTTBoard();
+
+            if(MLAgentX)
+            {
+                if(MLAgentX.TryGetComponent<iAgent>(out var AgentComp))
+                {
+                    agentScriptX = AgentComp;
+                    agentScriptX.SetTeam(Tile_State.O);
+                }
+            }
+
+            if(MLAgentO)
+            {
+                if(MLAgentO.TryGetComponent<iAgent>(out var AgentComp))
+                {
+                    agentScriptO = AgentComp;
+                    agentScriptO.SetTeam(Tile_State.O);
+                }
+            }
+        }
+
+        private void OnEnable()
+        {
+            SetupGame();
+
+            switch(mode)
+            {
+                case GAMEMODE.PvAI:
+                    MLAgentO.SetActive(true);
+                    break;
+                case GAMEMODE.AIvAI:
+                    MLAgentO.SetActive(true);
+                    MLAgentX.SetActive(true);
+                    break;
+            }
         }
 
         #endregion
 
         #region Public Methods
 
-        public void MoveTaken(int Index)
+        public void MoveTaken(int index)
         {
             Tile_State state = isCirclesTurn ? Tile_State.O : Tile_State.X;
-    
+            Vector2 pos = TTTBoard.ConvertIndexTo2DPoint(index);
+            Debug.Log(pos + " " + state.ToString());
+
             //Updating the values
-            BoardValues.TilePlaced(state, Index);
+            BoardValues.TilePlaced(state, (int)pos.x, (int)pos.y);
 
             //Updating the UI
-            BoardUI.Place(state, Index);
+            BoardUI.Place(state, index);
+
+            //Checking if the board state means the game is over
+            (bool, Tile_State) currentState = BoardValues.isGameOver();
+
+            if(currentState.Item1)
+            {
+                state = currentState.Item2;
+
+                BoardUI.GameEnded(state);
+                EndGameForAI();
+                return;
+            }
 
             isCirclesTurn = !isCirclesTurn;
 
-            //Checking if the board state means the game is over
-            if(BoardValues.boardState != BoardState.RUNNNING)
+            if(mode == GAMEMODE.PvAI || mode == GAMEMODE.AIvAI)
             {
-                BoardUI.GameEnded(BoardValues.boardState);
+                if(isCirclesTurn)
+                {
+                    agentScriptO.SetTurn(true);
+                    agentScriptX.SetTurn(false);
+                }
+                else
+                {
+                    agentScriptX.SetTurn(true);
+                    agentScriptO.SetTurn(false);
+                }
             }
+        }
+
+        public void ResetGame()
+        {
+
+        }
+
+        public int[,] RetrieveBoard()
+        {
+            return BoardValues.boardIndexes;
+        }
+
+        public bool canPlaceThere(int indexer)
+        {
+            Vector2 pos = TTTBoard.ConvertIndexTo2DPoint(indexer);
+
+            if(BoardValues.boardIndexes[(int)pos.x, (int)pos.y] != 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         #endregion
@@ -69,6 +159,16 @@ namespace ML.TTT
         private void SetupGame()
         {
             BoardValues = new TTTBoard();
+        }
+
+        private void EndGameForAI()
+        {
+            if(mode == GAMEMODE.PvP)
+            {
+                return;
+            }
+
+
         }
 
         #endregion

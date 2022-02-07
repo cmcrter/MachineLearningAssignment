@@ -56,7 +56,7 @@ namespace ML.TTT
             }
         }
 
-        public void GameEnded(BoardState endState)
+        public void GameEnded(Tile_State endState)
         {
             DisableBoardUI();
 
@@ -64,13 +64,13 @@ namespace ML.TTT
             {
                 switch(endState)
                 {
-                    case BoardState.XWIN:
+                    case Tile_State.X:
                         WinText.text = "X Wins!";
                         break;
-                    case BoardState.OWIN:
+                    case Tile_State.O:
                         WinText.text = "O Wins!";
                         break;
-                    case BoardState.DRAW:
+                    case Tile_State.BLANK:
                         WinText.text = "Draw!";
                         break;
                     default:

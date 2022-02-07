@@ -20,14 +20,6 @@ namespace ML.TTT
         O = 2
     }
 
-    public enum BoardState
-    {
-        RUNNNING = 0,
-        XWIN = 1,
-        OWIN = 2,
-        DRAW = 3,
-    }
-
     [Serializable]
     public class TTTBoard
     {
@@ -36,8 +28,7 @@ namespace ML.TTT
         public static int BOARD_WIDTH = 3;
         public static int BOARD_COUNT = 9;
 
-        public int[] boardIndexes;
-        public BoardState boardState;
+        public int[,] boardIndexes;
 
         #endregion
 
@@ -46,18 +37,16 @@ namespace ML.TTT
         public TTTBoard()
         {
             //Sets a blank board
-            boardIndexes = new int[9];
-            boardState = BoardState.RUNNNING;
+            boardIndexes = new int[3,3];
         }
 
         #endregion
 
         #region Public Methods
 
-        public void TilePlaced(Tile_State state, int index)
+        public void TilePlaced(Tile_State state, int tileX, int tileY)
         {
-            boardIndexes[index] = (int)state;
-            CheckGameState();
+            boardIndexes[tileX, tileY] = (int)state;
         }
 
         public static int[] GetNeighbours(int tileX, int tileY)
@@ -82,7 +71,7 @@ namespace ML.TTT
 
         public static int Convert2DPointToIndex(int tileX, int tileY)
         {
-            return (tileX * BOARD_WIDTH) + tileY;
+            return tileX + BOARD_WIDTH * tileY;
         }
 
         public static Vector2 ConvertIndexTo2DPoint(int index)
@@ -94,74 +83,68 @@ namespace ML.TTT
 
         #region Private Methods
 
-        private void CheckGameState()
+        public (bool, Tile_State) isGameOver()
         {
             bool bEmptyTile = false;
 
             // Check columns
             for(int x = 0; x < BOARD_WIDTH; x++)
             {
-                Tile_State intitalState = (Tile_State)boardIndexes[x];
+                Tile_State intitalState = (Tile_State)boardIndexes[x, 0];
 
                 if(CheckColumn(intitalState, x))
                 {
-                    boardState = (BoardState)intitalState;
-                    return;
+                    return (true, intitalState);
                 }
             }
 
             // Check rows
-            for(int y = 0; y < BOARD_COUNT; y++)
+            for(int y = 0; y < BOARD_WIDTH; y++)
             {
-                Tile_State intitalState = (Tile_State)boardIndexes[y];
+                Tile_State intitalState = (Tile_State)boardIndexes[0, y];
 
                 if(CheckRow(intitalState, y))
                 {
-                    boardState = (BoardState)intitalState;
-                    return;
+                    return (true, intitalState);
                 }
             }
 
             // Check diagonals
-            if(CheckDiagonals())
+            if((Tile_State)boardIndexes[1, 1] != Tile_State.BLANK && CheckDiagonals())
             {
-                boardState = (BoardState)boardIndexes[4];
-                return;
+                return (true, (Tile_State)boardIndexes[1, 1]);
             }
 
             //Checking whether it's a draw
-            for(int i = 0; i < BOARD_COUNT; i++)
+            for(int i = 0; i < BOARD_WIDTH; i++)
             {
-                if(boardIndexes[i] == 0)
+                for(int j = 0; j < BOARD_WIDTH; j++)
                 {
-                    bEmptyTile = true;
+                    if(boardIndexes[i, j] == 0)
+                    {
+                        bEmptyTile = true;
+                    }
                 }
             }
 
             if(!bEmptyTile)
             {
-                boardState = BoardState.DRAW;
-                return;
+                return (true, Tile_State.BLANK);
             }
-            
-            boardState = BoardState.RUNNNING;
+
+            return (false, Tile_State.BLANK);
         }
 
         public bool CheckColumn(Tile_State intitalState, int startX)
         {
-            for(int i = 0; i < BOARD_WIDTH; i++)
+            if(intitalState == Tile_State.BLANK)
             {
-                int index = Convert2DPointToIndex(startX, i);
+                return false;
+            }
 
-                if(index < 0 || index > BOARD_COUNT)
-                {
-                    break;
-                }
-
-                if((Tile_State)boardIndexes[index] != intitalState)
-                {
-                    return false;
-                }
+            if((Tile_State)boardIndexes[startX, 1] != intitalState || (Tile_State)boardIndexes[startX, 2] != intitalState)
+            {
+                return false;
             }
 
             return true;
@@ -169,19 +152,14 @@ namespace ML.TTT
 
         public bool CheckRow(Tile_State intitalState, int startY)
         {
-            for(int i = 0; i < BOARD_WIDTH; i++)
+            if(intitalState == Tile_State.BLANK)
             {
-                int index = Convert2DPointToIndex(i, startY);
+                return false;
+            }
 
-                if(index < 0 || index > BOARD_COUNT)
-                {
-                    break;
-                }
-
-                if((Tile_State)boardIndexes[index] != intitalState)
-                {
-                    return false;
-                }
+            if((Tile_State)boardIndexes[1, startY] != intitalState || (Tile_State)boardIndexes[2, startY] != intitalState)
+            {
+                return false;
             }
 
             return true;
@@ -189,13 +167,13 @@ namespace ML.TTT
 
         public bool CheckDiagonals()
         {
-            Tile_State middleState = (Tile_State)boardIndexes[4];
+            Tile_State middleState = (Tile_State)boardIndexes[1, 1];
 
-            if((Tile_State)boardIndexes[0] == middleState && (Tile_State)boardIndexes[8] == middleState)
+            if((Tile_State)boardIndexes[0, 0] == middleState && (Tile_State)boardIndexes[2, 2] == middleState)
             {
                 return true;
             }
-            else if((Tile_State)boardIndexes[2] == middleState && (Tile_State)boardIndexes[6] == middleState)
+            else if((Tile_State)boardIndexes[0, 2] == middleState && (Tile_State)boardIndexes[2, 0] == middleState)
             {
                 return true;
             }
