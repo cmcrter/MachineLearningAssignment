@@ -4,6 +4,7 @@
 [Bb]uild/
 [Bb]uilds/
 Assets/AssetStoreTools*
+venv/Lib/
 
 # Visual Studio cache directory
 .vs/

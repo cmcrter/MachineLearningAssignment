@@ -3,11 +3,13 @@
 // Author: Charles Carter
 // Date Created: 03/02/2022
 // Last Edited By: Charles Carter
-// Date Last Edited: 03/02/2022
+// Date Last Edited: 10/02/2022
 // Brief: The overall game manager which runs Tic Tac Toe
 //////////////////////////////////////////////////////////// 
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ML.TTT
@@ -41,6 +43,8 @@ namespace ML.TTT
         GameObject MLAgentO;
         iAgent agentScriptO;
 
+        private int[] WinScores = new int[3];
+
         #endregion
 
         #region Unity Methods
@@ -72,17 +76,6 @@ namespace ML.TTT
         private void OnEnable()
         {
             SetupGame();
-
-            switch(mode)
-            {
-                case GAMEMODE.PvAI:
-                    MLAgentO.SetActive(true);
-                    break;
-                case GAMEMODE.AIvAI:
-                    MLAgentO.SetActive(true);
-                    MLAgentX.SetActive(true);
-                    break;
-            }
         }
 
         #endregion
@@ -91,9 +84,14 @@ namespace ML.TTT
 
         public void MoveTaken(int index)
         {
+            if(index == -1)
+            {
+                index = GetRandomPos();
+            }
+
             Tile_State state = isCirclesTurn ? Tile_State.O : Tile_State.X;
             Vector2 pos = TTTBoard.ConvertIndexTo2DPoint(index);
-            Debug.Log(pos + " " + state.ToString());
+            //Debug.Log(pos + " " + state.ToString());
 
             //Updating the values
             BoardValues.TilePlaced(state, (int)pos.x, (int)pos.y);
@@ -107,9 +105,12 @@ namespace ML.TTT
             if(currentState.Item1)
             {
                 state = currentState.Item2;
-
+                WinScores[(int)state]++;
+    
                 BoardUI.GameEnded(state);
-                EndGameForAI();
+                BoardUI.AddWin(state, WinScores[(int)state]);
+
+                EndGameForAI(state);
                 return;
             }
 
@@ -132,7 +133,7 @@ namespace ML.TTT
 
         public void ResetGame()
         {
-
+            StartCoroutine(Co_WaitTime());
         }
 
         public int[,] RetrieveBoard()
@@ -152,6 +153,31 @@ namespace ML.TTT
             return true;
         }
 
+        public (bool, int) OneMoveLeft()
+        {
+            int spaceLeft = 0;
+            int indexSpace = 0;
+
+            for(int i = 0; i < 3; ++i)
+            {
+                for(int j = 0; j < 3; ++j)
+                {
+                    if(BoardValues.boardIndexes[i, j] == 0)
+                    {
+                        spaceLeft++;
+                        indexSpace = TTTBoard.Convert2DPointToIndex(i, j);
+                    }
+
+                    if(spaceLeft > 1)
+                    {
+                        return (false, 0);
+                    }
+                }
+            }
+
+            return (true, indexSpace);
+        }
+
         #endregion
 
         #region Private Methods
@@ -159,16 +185,66 @@ namespace ML.TTT
         private void SetupGame()
         {
             BoardValues = new TTTBoard();
+
+            switch(mode)
+            {
+                case GAMEMODE.PvAI:
+                    MLAgentO.SetActive(true);
+                    break;
+                case GAMEMODE.AIvAI:
+                    MLAgentO.SetActive(true);
+                    MLAgentX.SetActive(true);
+
+                    agentScriptX.SetTurn(true);
+                    agentScriptO.SetTurn(false);
+
+                    BoardUI.DisableBoardUI();
+                    break;
+            }
         }
 
-        private void EndGameForAI()
+        private void EndGameForAI(Tile_State endState)
         {
             if(mode == GAMEMODE.PvP)
             {
                 return;
             }
 
+            agentScriptO.Reinforce(endState);
+            agentScriptX.Reinforce(endState);
 
+            MLAgentO.SetActive(false);
+            MLAgentX.SetActive(false);
+
+            ResetGame();
+        }
+
+        private int GetRandomPos()
+        {
+            List<(int, int)> freeSpaces = new List<(int, int)>();
+
+            for(int i = 0; i < 3; ++i)
+            {
+                for(int j = 0; j < 3; ++j)
+                {
+                    if(BoardValues.boardIndexes[i, j] == 0)
+                    {
+                        freeSpaces.Add((i, j));
+                    }
+                }
+            }
+
+            (int, int) indexPoint = freeSpaces[UnityEngine.Random.Range(0, freeSpaces.Count)];
+
+            return TTTBoard.Convert2DPointToIndex(indexPoint.Item1, indexPoint.Item2);
+        }
+
+        private IEnumerator Co_WaitTime()
+        {
+            yield return new WaitForSeconds(1.0f);
+            BoardUI.ClearUI();
+            isCirclesTurn = false;
+            SetupGame();
         }
 
         #endregion

@@ -3,7 +3,7 @@
 // Author: Charles Carter
 // Date Created: 03/02/22
 // Last Edited By: Charles Carter
-// Date Last Edited: 03/02/22
+// Date Last Edited: 10/02/22
 // Brief: How scripts will interact with the board (as well as the player)
 //////////////////////////////////////////////////////////// 
 
@@ -30,6 +30,12 @@ namespace ML.TTT
 
         [SerializeField]
         private TextMeshProUGUI WinText;
+
+        //0 - Draw
+        //1 - X Wins
+        //2 - O Wins
+        [SerializeField]
+        private List<TextMeshProUGUI> winTexts;
 
         #endregion
 
@@ -84,8 +90,23 @@ namespace ML.TTT
         {
             for(int i = 0; i < TileParents.Count; ++i) 
             {
-                Destroy(TileParents[i].GetChild(0));
+                if(TileParents[i] == null)
+                {
+                    return;
+                }
+
+                if(TileParents[i].childCount > 0)
+                {
+                    Transform t = TileParents[i].GetChild(0);
+
+                    if(t != null)
+                    {
+                        Destroy(t.gameObject);
+                    }
+                }
             }
+
+            WinText.text = "Running!";
         }
 
         public void DisableBoardUI() 
@@ -102,6 +123,16 @@ namespace ML.TTT
             {
                 TileButtons[i].interactable = true;
             }
+        }
+
+        public void AddWin(Tile_State state, int winCount)
+        {
+            if(winTexts[(int)state] == null)
+            {
+                return;
+            }
+
+            winTexts[(int)state].text = winCount.ToString();
         }
 
         #endregion

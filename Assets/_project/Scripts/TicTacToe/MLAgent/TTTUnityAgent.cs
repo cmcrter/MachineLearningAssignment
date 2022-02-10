@@ -3,10 +3,11 @@
 // Author: Charles Carter
 // Date Created: 07/02/22
 // Last Edited By: Charles Carter
-// Date Last Edited: 07/02/22
+// Date Last Edited: 10/02/22
 // Brief: A Unity ML Agent to play TicTacToe
 //////////////////////////////////////////////////////////// 
 
+using System.Collections;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
@@ -34,7 +35,7 @@ namespace ML.TTT
 
         public override void OnEpisodeBegin()
         {
-            gameState.ResetGame();
+            //gameState.ResetGame();
         }
 
         public override void Heuristic(in ActionBuffers actionsOut)
@@ -45,20 +46,30 @@ namespace ML.TTT
         public override void OnActionReceived(ActionBuffers actions)
         {
             //Takes in an action by the player or AI
-            Debug.Log(actions.DiscreteActions[0]);
+            //Debug.Log(actions.DiscreteActions[0]);
 
             if(isMyTurn)
             {
+                (bool, int) gameStateForce = gameState.OneMoveLeft();
+
+                if(gameStateForce.Item1)
+                {
+                    gameState.MoveTaken(gameStateForce.Item2);
+                    return;
+                }
+
                 int index = actions.DiscreteActions[0];
 
                 if(gameState.canPlaceThere(index))
                 {
                     gameState.MoveTaken(index);
+                    AddReward(1.0f);
                 }
                 else
                 {
-                    //Get random free square and use it
-                    gameState.MoveTaken(-1);
+                    //Get random free square and use it / wait and request it to pick again
+                    StartCoroutine(Co_WaitTime());
+                    AddReward(-1.0f);
                 }
             }
         }
@@ -80,22 +91,22 @@ namespace ML.TTT
 
             sensor.AddObservation(currentBoard[0, 2]);
             sensor.AddObservation(currentBoard[1, 2]);
-            sensor.AddObservation(currentBoard[2, 2]);
+            sensor.AddObservation(currentBoard[2, 2]);      
         }
 
         public void CollectReward(Tile_State teamWon)
         {
             if (team == teamWon)
             {
-                AddReward(1.0f);
+                AddReward(10.0f);
             }
             else if (teamWon == Tile_State.BLANK)
             {
-                AddReward(0.1f);
+                AddReward(0.5f);
             }
             else
             {
-                AddReward(-1.0f);
+                AddReward(-10.0f);
             }
 
             EndEpisode();
@@ -111,8 +122,14 @@ namespace ML.TTT
 
             if(thisTurn)
             {
-                RequestDecision();
+                StartCoroutine(Co_WaitTime());
             }
+        }
+
+        private IEnumerator Co_WaitTime()
+        {
+            yield return new WaitForSeconds(0.1f);
+            RequestDecision();
         }
 
         #endregion

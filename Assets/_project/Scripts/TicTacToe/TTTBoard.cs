@@ -3,7 +3,7 @@
 // Author: Charles Carter
 // Date Created: 03/02/2022
 // Last Edited By: Charles Carter
-// Date Last Edited: 03/02/2022
+// Date Last Edited: 10/02/2022
 // Brief: The general board that the game uses
 //////////////////////////////////////////////////////////// 
 
@@ -46,6 +46,11 @@ namespace ML.TTT
 
         public void TilePlaced(Tile_State state, int tileX, int tileY)
         {
+            if(tileX >= BOARD_WIDTH || tileY >= BOARD_WIDTH || tileX < 0 || tileY < 0)
+            {
+                Debug.Log(tileY + " " + tileX + " placed");
+            }
+
             boardIndexes[tileX, tileY] = (int)state;
         }
 
