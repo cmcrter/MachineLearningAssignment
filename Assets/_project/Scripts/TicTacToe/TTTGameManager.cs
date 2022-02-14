@@ -25,6 +25,7 @@ namespace ML.TTT
     {
         #region Variables
 
+        [SerializeField]
         private bool isCirclesTurn = false;
 
         [SerializeField]
@@ -116,18 +117,14 @@ namespace ML.TTT
 
             isCirclesTurn = !isCirclesTurn;
 
-            if(mode == GAMEMODE.PvAI || mode == GAMEMODE.AIvAI)
+            if(MLAgentO.activeSelf)
             {
-                if(isCirclesTurn)
-                {
-                    agentScriptO.SetTurn(true);
-                    agentScriptX.SetTurn(false);
-                }
-                else
-                {
-                    agentScriptX.SetTurn(true);
-                    agentScriptO.SetTurn(false);
-                }
+                agentScriptO.SetTurn(isCirclesTurn);
+            }
+
+            if(MLAgentX.activeSelf)
+            {
+                agentScriptX.SetTurn(!isCirclesTurn);
             }
         }
 
@@ -178,6 +175,53 @@ namespace ML.TTT
             return (true, indexSpace);
         }
 
+        public float ReturnDrawAmount(Tile_State team)
+        {
+            int XAmount = 0;
+            int OAmount = 0;
+
+            for(int i = 0; i < 3; ++i)
+            {
+                for(int j = 0; j < 3; ++j)
+                {
+                    if(BoardValues.boardIndexes[i, j] == (int)Tile_State.O)
+                    {
+                        OAmount++;
+                    }
+                    else if(BoardValues.boardIndexes[i, j] == (int)Tile_State.X)
+                    {
+                        XAmount++;
+                    }
+                }
+            }
+
+            if(team == Tile_State.O)
+            {
+                if(OAmount > XAmount)
+                {
+                    return 0.75f;
+                }
+                else
+                {
+                    return -0.25f;
+                }
+            }
+
+            if(team == Tile_State.X)
+            {
+                if(XAmount > OAmount)
+                {
+                    return 0.75f;
+                }
+                else
+                {
+                    return -0.25f;
+                }
+            }
+
+            return 0;
+        }
+
         #endregion
 
         #region Private Methods
@@ -190,6 +234,7 @@ namespace ML.TTT
             {
                 case GAMEMODE.PvAI:
                     MLAgentO.SetActive(true);
+                    agentScriptO.SetTurn(false);
                     break;
                 case GAMEMODE.AIvAI:
                     MLAgentO.SetActive(true);
@@ -210,11 +255,15 @@ namespace ML.TTT
                 return;
             }
 
-            agentScriptO.Reinforce(endState);
-            agentScriptX.Reinforce(endState);
+            if(MLAgentO.activeSelf)
+            {
+                agentScriptO.Reinforce(endState);
+            }
 
-            MLAgentO.SetActive(false);
-            MLAgentX.SetActive(false);
+            if(MLAgentX.activeSelf)
+            {
+                agentScriptX.Reinforce(endState);
+            }
 
             ResetGame();
         }
@@ -241,7 +290,7 @@ namespace ML.TTT
 
         private IEnumerator Co_WaitTime()
         {
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.1f);
             BoardUI.ClearUI();
             isCirclesTurn = false;
             SetupGame();

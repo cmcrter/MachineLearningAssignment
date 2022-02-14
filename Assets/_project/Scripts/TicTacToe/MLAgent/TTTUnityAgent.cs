@@ -27,6 +27,7 @@ namespace ML.TTT
 
         [SerializeField]
         private TTTGameManager gameState;
+        [SerializeField]
         private bool isMyTurn;
 
         #endregion
@@ -35,7 +36,7 @@ namespace ML.TTT
 
         public override void OnEpisodeBegin()
         {
-            //gameState.ResetGame();
+            
         }
 
         public override void Heuristic(in ActionBuffers actionsOut)
@@ -46,31 +47,10 @@ namespace ML.TTT
         public override void OnActionReceived(ActionBuffers actions)
         {
             //Takes in an action by the player or AI
-            //Debug.Log(actions.DiscreteActions[0]);
-
             if(isMyTurn)
             {
-                (bool, int) gameStateForce = gameState.OneMoveLeft();
-
-                if(gameStateForce.Item1)
-                {
-                    gameState.MoveTaken(gameStateForce.Item2);
-                    return;
-                }
-
                 int index = actions.DiscreteActions[0];
-
-                if(gameState.canPlaceThere(index))
-                {
-                    gameState.MoveTaken(index);
-                    AddReward(1.0f);
-                }
-                else
-                {
-                    //Get random free square and use it / wait and request it to pick again
-                    StartCoroutine(Co_WaitTime());
-                    AddReward(-1.0f);
-                }
+                gameState.MoveTaken(index);
             }
         }
 
@@ -91,26 +71,39 @@ namespace ML.TTT
 
             sensor.AddObservation(currentBoard[0, 2]);
             sensor.AddObservation(currentBoard[1, 2]);
-            sensor.AddObservation(currentBoard[2, 2]);      
+            sensor.AddObservation(currentBoard[2, 2]);
+        }
+
+        public override void WriteDiscreteActionMask(IDiscreteActionMask actionMask)
+        {
+            int[,] currentBoard = gameState.RetrieveBoard();
+
+            for(int i = 0; i < currentBoard.Length; ++i)
+            {
+                Vector2 pos = TTTBoard.ConvertIndexTo2DPoint(i);
+                bool isFilled = true ? currentBoard[(int)pos.x, (int)pos.y] != 0 : false;
+
+                actionMask.SetActionEnabled(0, i, !isFilled);
+            }
         }
 
         public void CollectReward(Tile_State teamWon)
         {
             if (team == teamWon)
             {
-                AddReward(10.0f);
+                AddReward(1.0f);
             }
             else if (teamWon == Tile_State.BLANK)
             {
-                AddReward(0.5f);
+                AddReward(gameState.ReturnDrawAmount(team));
             }
             else
             {
-                AddReward(-10.0f);
+                AddReward(-1.0f);
             }
 
-            EndEpisode();
-        }
+            EndEpisode();           
+        } 
 
         #endregion
 
@@ -128,7 +121,7 @@ namespace ML.TTT
 
         private IEnumerator Co_WaitTime()
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
             RequestDecision();
         }
 
