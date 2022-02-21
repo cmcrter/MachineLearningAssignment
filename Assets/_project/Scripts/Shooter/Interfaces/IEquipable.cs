@@ -11,11 +11,19 @@ using UnityEngine;
 
 public interface IEquipable
 {    
+    Transform transform
+    {
+        get;
+    }
+
     bool canPickup
     {
         get;
     }
 
-    public void Pickup();
-    public void Drop();
+    public void UseEquippable();
+    public void Pickup(Transform handPos);
+
+    //The drop can be used for multiple types (higher speed drop is a throw)
+    public void Drop(Vector3 direction, float power);
 }

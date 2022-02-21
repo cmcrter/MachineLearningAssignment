@@ -11,21 +11,55 @@ using UnityEngine;
 
 public class CharacterPickupTrigger : MonoBehaviour
 {
-    #region Public Fields
+    #region Variables
+
+    [SerializeField]
+    private Transform handTransform;
+
+    [SerializeField]
+    private IEquipable currentlyEquipped;
+
     #endregion
- 
+
     #region Unity Methods
-    void Start()
+
+    private void OnTriggerEnter(Collider other)
     {
-	
+        if(other.TryGetComponent(out IEquipable equippable))
+        {
+            if(equippable.canPickup && handTransform)
+            {
+                //Putting it in the right spot
+                //equippable.transform.position = handTransform.position;
+                //equippable.transform.rotation = handTransform.rotation;
+
+                if(currentlyEquipped != null)
+                {
+                    ThrowEquippable();
+                }
+
+                equippable.Pickup(handTransform);
+
+                currentlyEquipped = equippable;
+            }
+        }
     }
- 
-    void Update()
-    {
-	
-    }
+
     #endregion
- 
+
     #region Private Methods
+
+    private void UseEquippable()
+    {
+        currentlyEquipped.UseEquippable();
+    }
+
+    private void ThrowEquippable()
+    {
+        currentlyEquipped.Drop(handTransform.forward, 4f);
+
+        currentlyEquipped = null;
+    }
+
     #endregion
 }

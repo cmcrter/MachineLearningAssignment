@@ -1,17 +1,17 @@
 ////////////////////////////////////////////////////////////
-// File: sAgentSenses
+// File: CharacterSense
 // Author: Charles Carter
 // Date Created: 21/02/22
 // Last Edited By: Charles Carter
 // Date Last Edited: 21/02/22
-// Brief: A script to get environmental data for the game
+// Brief: A script to get environmental data for the character
 //////////////////////////////////////////////////////////// 
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class sAgentSenses : MonoBehaviour
+public class CharacterSenses : MonoBehaviour
 {
 	public float viewRadius;
 	[Range(0, 360)]
