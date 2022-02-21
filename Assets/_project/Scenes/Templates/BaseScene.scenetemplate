@@ -64,5 +64,5 @@ MonoBehaviour:
   description: A Template to put the correct stuff in place for the scene
   preview: {fileID: -2131367840341294933}
   dependencies: []
-  templatePipeline: {fileID: 11500000, guid: 8a8d6a3aa70f0f14ba65dd779316e453, type: 3}
+  templatePipeline: {fileID: 11500000, guid: c2d8e9ca861d7e447a0c64895bb353aa, type: 3}
   addToDefaults: 0

@@ -10,15 +10,33 @@
                 "auxillary_file_paths": [
                     "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-43577.pt"
                 ]
+            },
+            {
+                "steps": 43703,
+                "file_path": "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-43703.onnx",
+                "reward": -0.1130952380952381,
+                "creation_time": 1644937284.6703882,
+                "auxillary_file_paths": [
+                    "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-43703.pt"
+                ]
+            },
+            {
+                "steps": 43790,
+                "file_path": "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-43790.onnx",
+                "reward": 0.12643678160919541,
+                "creation_time": 1644937517.2941175,
+                "auxillary_file_paths": [
+                    "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-43790.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 43577,
+            "steps": 43790,
             "file_path": "results\\WinTicTacToe\\WinTicTacToe.onnx",
-            "reward": 0.15051546391752577,
-            "creation_time": 1644860415.0052824,
+            "reward": 0.12643678160919541,
+            "creation_time": 1644937517.2941175,
             "auxillary_file_paths": [
-                "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-43577.pt"
+                "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-43790.pt"
             ]
         }
     },
