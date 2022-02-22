@@ -28,7 +28,8 @@ public class InstanceManager : MonoBehaviour
     private TrainingType currentTraining;
 
     [SerializeField]
-    private List<IAgentable> Agents;
+    private List<MLInputManager> Agents;
+    private CharacterInputManager Player;
 
     [Header("Round Timer Variables")]
     [SerializeField]

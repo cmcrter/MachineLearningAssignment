@@ -8,7 +8,6 @@
 //////////////////////////////////////////////////////////// 
 
 using System.Collections;
-using Shooter;
 using UnityEngine;
 
 public class CharacterHealth : MonoBehaviour, IDamageable

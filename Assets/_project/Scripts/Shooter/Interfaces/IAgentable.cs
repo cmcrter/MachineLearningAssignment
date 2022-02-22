@@ -1,31 +1,17 @@
 ////////////////////////////////////////////////////////////
-// File: 
-// Author: 
-// Date Created: 
-// Last Edited By:
-// Date Last Edited:
-// Brief: 
+// File: IAgentable.cs
+// Author: Charles Carter
+// Date Created: 22/02/22
+// Last Edited By: Charles Carter
+// Date Last Edited: 22/02/22
+// Brief: An interface for different types of machine learning agents
 //////////////////////////////////////////////////////////// 
 
 using UnityEngine;
 
-public class IAgentable : MonoBehaviour
+public interface IAgentable
 {
-    #region Public Fields
-    #endregion
- 
-    #region Unity Methods
-    void Start()
-    {
-	
-    }
- 
-    void Update()
-    {
-	
-    }
-    #endregion
- 
-    #region Private Methods
-    #endregion
+    public void SetTeam(int newTeam);
+    public void SetTurn(bool isMyTurn);
+    public void Reinforce(bool negative);
 }
