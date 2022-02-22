@@ -9,7 +9,23 @@
 
 using UnityEngine;
 
-public interface InterfaceExtends : IViewable, IDamageable, IEquipable
+public class IResettable : MonoBehaviour
 {
-
+    #region Public Fields
+    #endregion
+ 
+    #region Unity Methods
+    void Start()
+    {
+	
+    }
+ 
+    void Update()
+    {
+	
+    }
+    #endregion
+ 
+    #region Private Methods
+    #endregion
 }

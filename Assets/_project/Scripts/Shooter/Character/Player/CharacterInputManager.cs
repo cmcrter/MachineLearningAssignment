@@ -9,6 +9,7 @@
 
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterActions))]
 public class CharacterInputManager : MonoBehaviour
 {
     #region Variables
@@ -20,6 +21,11 @@ public class CharacterInputManager : MonoBehaviour
 
     #region Unity Methods
 
+    private void Awake()
+    {
+        actions = actions ?? GetComponent<CharacterActions>();
+    }
+
     private void Update()
     {
         if(actions)
@@ -27,6 +33,7 @@ public class CharacterInputManager : MonoBehaviour
             if(actions.isGrounded)
             {
                 GroundedMovement();
+                WeaponControl();
             }
         }
     }
@@ -43,32 +50,45 @@ public class CharacterInputManager : MonoBehaviour
 
         if(Input.GetKey(KeyCode.A))
         {
-            
+            actions.MoveLeft();
         }
 
         if(Input.GetKey(KeyCode.S))
         {
-            
+            actions.MoveBackward();
         }
 
         if(Input.GetKey(KeyCode.W))
         {
-
+            actions.MoveForward();
         }
 
         if(Input.GetKey(KeyCode.D))
         {
-
+            actions.MoveRight();
         }
 
         if(Input.GetKey(KeyCode.LeftArrow))
         {
-
+            actions.TurnLeft();
         }
 
         if(Input.GetKey(KeyCode.RightArrow))
         {
+            actions.TurnRight();
+        }
+    }
 
+    private void WeaponControl()
+    {
+        if(Input.GetKey(KeyCode.Space))
+        {
+            actions.Shoot();
+        }
+
+        if(Input.GetKey(KeyCode.Q))
+        {
+            actions.Drop();
         }
     }
 

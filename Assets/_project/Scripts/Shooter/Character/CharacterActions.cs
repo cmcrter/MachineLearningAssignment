@@ -30,8 +30,6 @@ public class CharacterActions : MonoBehaviour, IControllable
     private CharacterController movementController;
     [SerializeField]
     private CharacterPickupTrigger characterTrigger;
-    [SerializeField]
-    private CharacterHealth health;
 
     [SerializeField]
     private float BaseRotationSpeed = 150f;
@@ -130,12 +128,18 @@ public class CharacterActions : MonoBehaviour, IControllable
 
     public void Shoot()
     {
+        if(!characterTrigger)
+            return;
+
         //If there's a gun equipped, shoot it
         characterTrigger.UseEquippable();
     }
 
     public void Drop()
     {
+        if(!characterTrigger)
+            return;
+
         characterTrigger.ThrowEquippable();
     }
 

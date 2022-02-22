@@ -13,5 +13,5 @@ public interface IAgentable
 {
     public void SetTeam(int newTeam);
     public void SetTurn(bool isMyTurn);
-    public void Reinforce(bool negative);
+    public void Reinforce(int state);
 }
