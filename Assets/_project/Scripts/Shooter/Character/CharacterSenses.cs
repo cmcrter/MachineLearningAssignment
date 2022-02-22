@@ -21,6 +21,7 @@ public class CharacterSenses : MonoBehaviour
 	public LayerMask obstacleMask;
 
 	public List<Transform> visibleTargets = new List<Transform>();
+	public List<Transform> obstacles = new List<Transform>();
 
 	public float meshResolution;
 	public int edgeResolveIterations;
@@ -57,6 +58,8 @@ public class CharacterSenses : MonoBehaviour
 	private void FindVisibleTargets()
 	{
 		visibleTargets.Clear();
+		obstacles.Clear();
+
 		Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
 
 		for(int i = 0; i < targetsInViewRadius.Length; i++)
@@ -102,7 +105,6 @@ public class CharacterSenses : MonoBehaviour
 				}
 
 			}
-
 
 			viewPoints.Add(newViewCast.point);
 			oldViewCast = newViewCast;
@@ -167,6 +169,11 @@ public class CharacterSenses : MonoBehaviour
 
 		if(Physics.Raycast(transform.position, dir, out hit, viewRadius, obstacleMask))
 		{
+			if(!obstacles.Contains(hit.transform))
+			{
+				obstacles.Add(hit.transform);
+			}
+
 			return new ViewCastInfo(true, hit.point, hit.distance, globalAngle);
 		}
 		else

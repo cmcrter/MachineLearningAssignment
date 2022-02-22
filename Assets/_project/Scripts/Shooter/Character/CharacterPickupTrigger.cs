@@ -7,6 +7,7 @@
 // Brief: A script to register when the character is over an equippable, to auto-equip
 //////////////////////////////////////////////////////////// 
 
+using System.Collections;
 using UnityEngine;
 
 public class CharacterPickupTrigger : MonoBehaviour
@@ -15,9 +16,14 @@ public class CharacterPickupTrigger : MonoBehaviour
 
     [SerializeField]
     private Transform handTransform;
+    private IEquipable currentlyEquipped;
 
     [SerializeField]
-    private IEquipable currentlyEquipped;
+    private Transform equipObj;
+    [SerializeField]
+    private Transform equipParent;
+
+    public bool bEquipped = false;
 
     #endregion
 
@@ -38,28 +44,46 @@ public class CharacterPickupTrigger : MonoBehaviour
                     ThrowEquippable();
                 }
 
-                equippable.Pickup(handTransform);
+                equippable.Pickup(handTransform, gameObject.layer);
 
                 currentlyEquipped = equippable;
+                equipObj = equippable.transform;
+                bEquipped = true;
             }
         }
     }
 
     #endregion
 
-    #region Private Methods
+    #region Public Methods
 
-    private void UseEquippable()
+    public void UseEquippable()
     {
+        if(currentlyEquipped == null)
+        {
+            return;
+        }
+
         currentlyEquipped.UseEquippable();
     }
 
-    private void ThrowEquippable()
+    public void ThrowEquippable()
     {
-        currentlyEquipped.Drop(handTransform.forward, 4f);
+        if(currentlyEquipped == null) 
+        {
+            return;
+        }
+
+        currentlyEquipped.Drop(handTransform.forward, 4f, equipParent);
 
         currentlyEquipped = null;
+        equipObj = null;
+        bEquipped = false;
     }
+
+    #endregion
+
+    #region Private Methods
 
     #endregion
 }

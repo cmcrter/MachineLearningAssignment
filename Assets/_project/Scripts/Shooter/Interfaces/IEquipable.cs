@@ -22,8 +22,8 @@ public interface IEquipable
     }
 
     public void UseEquippable();
-    public void Pickup(Transform handPos);
+    public void Pickup(Transform handPos, int LayerToGoTo);
 
     //The drop can be used for multiple types (higher speed drop is a throw)
-    public void Drop(Vector3 direction, float power);
+    public void Drop(Vector3 direction, float power, Transform equipParent);
 }

@@ -4,7 +4,7 @@
 // Date Created: 21/02/22
 // Last Edited By: Charles Carter
 // Date Last Edited: 21/02/22
-// Brief: A script to controller an agent
+// Brief: A script to control an agent (Where the inputs are handled)
 //////////////////////////////////////////////////////////// 
 
 using UnityEngine;
@@ -18,9 +18,11 @@ namespace Shooter
 
         [SerializeField]
         private CharacterController movementController;
+        [SerializeField]
+        CharacterPickupTrigger characterTrigger;
 
         [SerializeField]
-        private float BaseRotationSpeed = 2f;
+        private float BaseRotationSpeed = 1.5f;
 
         [SerializeField]
         private float BaseMovementSpeed = 4f;
@@ -47,12 +49,17 @@ namespace Shooter
 
         #region Unity Methods
 
-        void Start()
+        private void Awake()
+        {
+            
+        }
+
+        private void Start()
         {
             CurrentMovementSpeed = BaseMovementSpeed;
         }
 
-        void Update()
+        private void Update()
         {
             isGrounded = Physics.CheckSphere(groundCheckObj.position, groundCheckRadius, ~charLayer);
 
@@ -65,9 +72,18 @@ namespace Shooter
                 AirMovement();
             }
 
-            if(Input.GetKey(KeyCode.Space))
+            if(characterTrigger && characterTrigger.bEquipped)
             {
-                //If there's a gun equipped, shoot it
+                if(Input.GetKey(KeyCode.Space))
+                {
+                    //If there's a gun equipped, shoot it
+                    characterTrigger.UseEquippable();
+                }
+
+                if(Input.GetKey(KeyCode.Q))
+                {
+                    characterTrigger.ThrowEquippable();
+                }
             }
 
             //Applying gravity
