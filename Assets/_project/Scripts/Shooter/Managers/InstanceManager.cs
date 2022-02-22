@@ -3,7 +3,7 @@
 // Author: Charles Carter
 // Date Created: 21/02/22
 // Last Edited By: Charles Carter
-// Date Last Edited: 21/02/22
+// Date Last Edited: 22/02/22
 // Brief: A script for AI to train in a simulated game
 //////////////////////////////////////////////////////////// 
 
@@ -82,6 +82,7 @@ public class InstanceManager : MonoBehaviour
 
     #region Private Methods
 
+    //If there's no bullet pool, this will create one
     public IObjectPool<GameObject> bulletPool
     {
         get
@@ -156,7 +157,13 @@ public class InstanceManager : MonoBehaviour
 
     private void RoundOver()
     {
+        
+    }
 
+    //A player has died, checking whether this round is over
+    private void CheckRoundOverCondition()
+    {
+    
     }
 
     #endregion

@@ -3,10 +3,12 @@
 // Author: Charles Carter
 // Date Created: 21/02/22
 // Last Edited By: Charles Carter
-// Date Last Edited: 21/02/22
+// Date Last Edited: 22/02/22
 // Brief: A script to keep the health of the character
 //////////////////////////////////////////////////////////// 
 
+using System.Collections;
+using Shooter;
 using UnityEngine;
 
 public class CharacterHealth : MonoBehaviour, IDamageable
@@ -35,6 +37,8 @@ public class CharacterHealth : MonoBehaviour, IDamageable
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, fullHealth);
 
+        UpdateUI(currentHealth / fullHealth);
+
         if(isCharacterDead())
         {
             isDead = true;
@@ -49,11 +53,16 @@ public class CharacterHealth : MonoBehaviour, IDamageable
 
         currentHealth += damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, fullHealth);
+
+        UpdateUI(currentHealth / fullHealth);
     }
 
     #endregion
 
     #region Variables
+
+    [SerializeField]
+    CharacterManager mainCharacterManager;
 
     [SerializeField]
     private float currentHealth;
@@ -62,32 +71,83 @@ public class CharacterHealth : MonoBehaviour, IDamageable
 
     public bool isDead = false;
 
-    #endregion
+    public Transform HealthVisualiser;
+	public Transform healthBar;
+	public Transform backgroundBar;
+	public bool showWhenFull;
+    [SerializeField]
+	private Transform CameraToFace;
 
-    #region Unity Methods
+#endregion
+
+#region Unity Methods
 
     private void Start()
     {
         currentHealth = fullHealth;
+        UpdateUI(1.0f);
+    }
+
+    private void Update()
+    {
+        Vector3 direction = CameraToFace.transform.forward;
+        HealthVisualiser.transform.forward = -direction;
     }
 
     #endregion
 
     #region Private Methods
 
+    public void UpdateUI(float normalizedHealth)
+    {
+        Vector3 scale = Vector3.one;
+
+        if(healthBar != null)
+        {
+            scale.x = normalizedHealth;
+            healthBar.transform.localScale = scale;
+        }
+
+        if(backgroundBar != null)
+        {
+            scale.x = 1 - normalizedHealth;
+            backgroundBar.transform.localScale = scale;
+        }
+
+        SetVisible(showWhenFull || normalizedHealth < 1.0f);
+    }
+
+    public void SetVisible(bool visible)
+    {
+        HealthVisualiser.gameObject.SetActive(visible);
+    }
+
     private bool isCharacterDead()
     {
-        return (false ? currentHealth != 0 : true);
+        return (currentHealth == 0);
     }
 
     private void CallCharacterDeath()
     {
-        //Update the UI on the character
+        if(Debug.isDebugBuild)
+        {
+            Debug.Log("Character Dead: " + transform.name, this);
+        }
 
-        //Play the explosion
+        //Play VFX
 
         //Wait before telling instance/game manager
+        StartCoroutine(Co_DeathCooldown());
+    }
 
+    private IEnumerator Co_DeathCooldown()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        if(mainCharacterManager)
+        {
+            //mainCharacterManager.
+        }
     }
 
     #endregion

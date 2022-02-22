@@ -47,6 +47,9 @@ public class Gun : MonoBehaviour, IEquipable
     [SerializeField]
     InstanceManager instanceManager;
 
+    [SerializeField]
+    private float shotCooldownDuration = 0.3f;
+
     #endregion
 
     #region Public Methods
@@ -121,7 +124,7 @@ public class Gun : MonoBehaviour, IEquipable
     public IEnumerator Co_ShootCooldown()
     {
         canFire = false;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(shotCooldownDuration);
         canFire = true;
     }
 
