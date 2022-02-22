@@ -12,7 +12,7 @@ using UnityEngine.Pool;
 
 namespace Shooter
 {
-    public class CharacterManager : MonoBehaviour
+    public class CharacterInputManager : MonoBehaviour
     {
         #region Variables
 

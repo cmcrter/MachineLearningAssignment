@@ -62,7 +62,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable
     #region Variables
 
     [SerializeField]
-    CharacterManager mainCharacterManager;
+    CharacterInputManager mainCharacterManager;
 
     [SerializeField]
     private float currentHealth;
