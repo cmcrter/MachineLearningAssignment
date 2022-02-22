@@ -55,7 +55,9 @@ public class CharacterHealth : MonoBehaviour, IDamageable
 
     #region Variables
 
+    [SerializeField]
     private float currentHealth;
+    [SerializeField]
     private float fullHealth;
 
     public bool isDead = false;
@@ -64,14 +66,9 @@ public class CharacterHealth : MonoBehaviour, IDamageable
 
     #region Unity Methods
 
-    void Start()
+    private void Start()
     {
-	
-    }
- 
-    void Update()
-    {
-	
+        currentHealth = fullHealth;
     }
 
     #endregion

@@ -49,20 +49,6 @@ public class Gun : MonoBehaviour, IEquipable
 
     #endregion
 
-    #region Unity Methods
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
-
-    #endregion
-
     #region Public Methods
 
     public void InstialiseGun(IObjectPool<GameObject> bulletpool)
@@ -111,20 +97,20 @@ public class Gun : MonoBehaviour, IEquipable
 
         GameObject bulletToUse = currentbulletpool.Get();
 
-        //So the bullet doesnt collide with the gun/player when it turns on
+        //So the bullet doesn't collide with the gun/player when it turns on
         bulletToUse.layer = gameObject.layer;
 
         //Moving the bullet to the right place
         bulletToUse.transform.position = barrellPos.transform.position;
-        bulletToUse.transform.forward = barrellPos.transform.forward;
 
         //Firing the bullet out
         if(bulletToUse.TryGetComponent(out Bullet bullet))
         {
-            bullet.Fired(bulletToUse.transform.forward, 45f);
+            bullet.Fired(barrellPos.transform.forward, 45f);
         }
-    }
 
+        StartCoroutine(Co_ShootCooldown());
+    }
 
     private IEnumerator Co_PickUpCooldown()
     {
@@ -134,9 +120,9 @@ public class Gun : MonoBehaviour, IEquipable
 
     public IEnumerator Co_ShootCooldown()
     {
-        bFireable = false;
-        yield return new WaitForSeconds(0.4f);
-        bFireable = true;
+        canFire = false;
+        yield return new WaitForSeconds(0.3f);
+        canFire = true;
     }
 
     #endregion

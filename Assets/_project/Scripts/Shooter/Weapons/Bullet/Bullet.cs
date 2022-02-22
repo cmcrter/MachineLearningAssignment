@@ -41,12 +41,18 @@ public class Bullet : MonoBehaviour
         gameObject.SetActive(true);
 
         rb.isKinematic = false;
-        rb.AddForce(direction * force, ForceMode.Impulse);
+        rb.AddForce(direction.normalized * force, ForceMode.Impulse);
     }
 
     #endregion
 
     #region Private Methods
+
+    private void OnDisable()
+    {
+        rb.isKinematic = true;
+        rb.velocity = Vector3.zero;
+    }
 
     private void OnTriggerEnter(Collider other)
     {

@@ -53,6 +53,19 @@ public class CharacterSenses : MonoBehaviour
 	private void LateUpdate()
 	{
 		DrawFieldOfView();
+
+		if(Debug.isDebugBuild)
+		{
+			foreach(Transform target in visibleTargets)
+			{
+				Debug.DrawLine(transform.position, target.position, Color.green);
+			}
+
+			foreach(Transform obstacle in obstacles)
+			{
+				Debug.DrawLine(transform.position, obstacle.position, Color.black);
+			}
+		}
 	}
 
 	private void FindVisibleTargets()

@@ -30,6 +30,9 @@ public class InstanceManager : MonoBehaviour
     [SerializeField]
     private List<IAgentable> Agents;
 
+    [Header("Round Timer Variables")]
+    [SerializeField]
+    private float RoundDuration = 300f;
     [SerializeField]
     private Timer roundTime;
     private Coroutine roundCoroutine;
@@ -56,12 +59,13 @@ public class InstanceManager : MonoBehaviour
     {
         bullets = new LinkedPool<GameObject>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, collectionChecks, bulletPoolMaxSize);
 
+        //Going through the guns already on the level and setting them up
         foreach(Gun gun in guns)
         {
             gun.InstialiseGun(bullets);
         }
 
-        roundTime = new Timer(600);
+        roundTime = new Timer(RoundDuration);
     }
 
     private void OnEnable()
@@ -119,19 +123,40 @@ public class InstanceManager : MonoBehaviour
 
     private IEnumerator Co_RoundTimer()
     {
+        //A loop of the round timer to play whilst the game is played
+        UpdateUI();
+        yield return new WaitForSeconds(1.0f);
+
         while(roundTime.isActive)
         {
             roundTime.Tick(Time.deltaTime);
-
-            if(RoundTimerText)
-            {
-                RoundTimerText.text = roundTime.current_time.ToString();
-            }
+            UpdateUI();
 
             yield return null;
         }
 
+        RoundOver();
         roundCoroutine = null;
+    }
+
+    private void UpdateUI()
+    {
+        if(RoundTimerText == null) return;
+
+        //Getting the closest second
+        int seconds = Mathf.FloorToInt(roundTime.current_time % 60);
+        int minutes = Mathf.FloorToInt(roundTime.current_time / 60);
+
+        //If it's above 0 display it as a second
+        if(seconds > 0 || minutes > 0)
+        {
+            RoundTimerText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+        }
+    }
+
+    private void RoundOver()
+    {
+
     }
 
     #endregion
