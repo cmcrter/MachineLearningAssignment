@@ -1,17 +1,15 @@
 ////////////////////////////////////////////////////////////
-// File: TreePlacer.cs
-// Author: Charles Carter
-// Date Created: 05/03/22
-// Last Edited By: Charles Carter
-// Date Last Edited: 05/03/22
-// Brief: A way to add in trees quickly for dressing track scene
+// File: 
+// Author: 
+// Date Created: 
+// Last Edited By:
+// Date Last Edited:
+// Brief: 
 //////////////////////////////////////////////////////////// 
 
-using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(TreePlacerTool))]
-public class TreePlacer : MonoBehaviour
+public class TreePlacerTool : MonoBehaviour
 {
     #region Public Fields
     #endregion

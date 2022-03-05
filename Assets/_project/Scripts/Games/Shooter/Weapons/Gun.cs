@@ -45,7 +45,7 @@ public class Gun : MonoBehaviour, IEquipable
     private Transform barrellPos;
 
     [SerializeField]
-    InstanceManager instanceManager;
+    ShooterInstanceManager instanceManager;
 
     [SerializeField]
     private float shotCooldownDuration = 0.3f;

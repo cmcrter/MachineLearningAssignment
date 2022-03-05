@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour
     #region Variables
 
     [SerializeField]
-    private InstanceManager instanceManager;
+    private ShooterInstanceManager instanceManager;
     [SerializeField]
     private Rigidbody rb;
     [SerializeField]

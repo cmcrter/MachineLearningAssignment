@@ -1,17 +1,15 @@
 ////////////////////////////////////////////////////////////
-// File: TreePlacer.cs
+// File: FinishLineTrigger.cs
 // Author: Charles Carter
 // Date Created: 05/03/22
 // Last Edited By: Charles Carter
 // Date Last Edited: 05/03/22
-// Brief: A way to add in trees quickly for dressing track scene
+// Brief: The trigger to tell the karting game manager that a car has crossed the finish line (and making sure it's a valid lap)
 //////////////////////////////////////////////////////////// 
 
-using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(TreePlacerTool))]
-public class TreePlacer : MonoBehaviour
+public class FinishLineTrigger : MonoBehaviour
 {
     #region Public Fields
     #endregion

@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////
-// File: InstanceManager.cs
+// File: ShooterInstanceManager.cs
 // Author: Charles Carter
 // Date Created: 21/02/22
 // Last Edited By: Charles Carter
@@ -13,7 +13,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 
 //Not a singleton due to multiple instances speeding up training
-public class InstanceManager : MonoBehaviour
+public class ShooterInstanceManager : MonoBehaviour
 {
     public enum TrainingType
     {
