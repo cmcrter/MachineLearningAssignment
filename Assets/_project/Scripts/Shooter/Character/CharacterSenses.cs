@@ -30,14 +30,22 @@ public class CharacterSenses : MonoBehaviour
 	public float maskCutawayDst = .1f;
 
 	public MeshFilter viewMeshFilter;
-	Mesh viewMesh;
+	public Mesh viewMesh;
 
-	private void Start()
-	{
+	public Transform SensorPosition;
+
+	[SerializeField]
+	private List<Vector3> hitPositions = new List<Vector3>();
+
+    private void Awake()
+    {
 		viewMesh = new Mesh();
 		viewMesh.name = "View Mesh";
 		viewMeshFilter.mesh = viewMesh;
+	}
 
+    private void Start()
+	{
 		StartCoroutine("FindTargetsWithDelay", .2f);
 	}
 
@@ -140,6 +148,11 @@ public class CharacterSenses : MonoBehaviour
 			}
 		}
 
+		hitPositions = viewPoints;
+
+		if(!viewMesh)
+			return;
+		
 		viewMesh.Clear();
 
 		viewMesh.vertices = vertices;
@@ -180,7 +193,7 @@ public class CharacterSenses : MonoBehaviour
 		Vector3 dir = DirFromAngle(globalAngle, true);
 		RaycastHit hit;
 
-		if(Physics.Raycast(transform.position, dir, out hit, viewRadius, obstacleMask))
+		if(Physics.Raycast(SensorPosition.position, dir, out hit, viewRadius, obstacleMask))
 		{
 			if(!obstacles.Contains(hit.transform))
 			{
@@ -191,7 +204,7 @@ public class CharacterSenses : MonoBehaviour
 		}
 		else
 		{
-			return new ViewCastInfo(false, transform.position + dir * viewRadius, viewRadius, globalAngle);
+			return new ViewCastInfo(false, SensorPosition.position + dir * viewRadius, viewRadius, globalAngle);
 		}
 	}
 

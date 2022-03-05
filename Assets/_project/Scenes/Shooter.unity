@@ -1374,6 +1374,8 @@ MonoBehaviour:
   edgeDstThreshold: 0.5
   maskCutawayDst: 0.1
   viewMeshFilter: {fileID: 84874736}
+  viewMesh: {fileID: 0}
+  SensorPosition: {fileID: 84874733}
 --- !u!114 &399019428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3833,6 +3835,8 @@ MonoBehaviour:
   edgeDstThreshold: 0.5
   maskCutawayDst: 0.1
   viewMeshFilter: {fileID: 162953469}
+  viewMesh: {fileID: 0}
+  SensorPosition: {fileID: 162953467}
 --- !u!114 &774963823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3962,6 +3966,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   actions: {fileID: 774963829}
+  characterPickup: {fileID: 677878914}
 --- !u!114 &774963829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3980,7 +3985,7 @@ MonoBehaviour:
   BaseMovementSpeed: 4
   CurrentMovementSpeed: 0
   gravity: -9.81
-  groundCheckObj: {fileID: 0}
+  groundCheckObj: {fileID: 1269547717}
   groundCheckRadius: 0.35
   charLayer:
     serializedVersion: 2
