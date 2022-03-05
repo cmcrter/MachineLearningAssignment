@@ -59,6 +59,8 @@ public class RacecarMovement : MonoBehaviour, IControllable
  
     void FixedUpdate()
     {
+        rb.angularVelocity = Vector3.zero;
+
         if(brake)
         {
             Brake();
@@ -99,14 +101,14 @@ public class RacecarMovement : MonoBehaviour, IControllable
     public void SteerLeft()
     {
         Quaternion deltaRotation = Quaternion.Euler(transform.up * -steeringSpeed * Time.fixedDeltaTime);
-        rb.MoveRotation(rb.rotation * deltaRotation);
+        rb.MoveRotation(transform.rotation * deltaRotation);
         steerL = false;
     }
 
     public void SteerRight()
     {
         Quaternion deltaRotation = Quaternion.Euler(transform.up * steeringSpeed * Time.fixedDeltaTime);
-        rb.MoveRotation(rb.rotation * deltaRotation);
+        rb.MoveRotation(transform.rotation * deltaRotation);
         steerR = false;
     }
 
