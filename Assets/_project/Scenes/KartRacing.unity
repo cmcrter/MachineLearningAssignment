@@ -6162,25 +6162,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1707485425}
     m_Modifications:
-    - target: {fileID: 619702073, guid: 864c013b0ac8cdb4bb9c893b4cf2ab0e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132147963318158, guid: 864c013b0ac8cdb4bb9c893b4cf2ab0e, type: 3}
-      propertyPath: meshResolution
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4233621152142471631, guid: 864c013b0ac8cdb4bb9c893b4cf2ab0e, type: 3}
-      propertyPath: steeringSpeed
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4546134727303796075, guid: 864c013b0ac8cdb4bb9c893b4cf2ab0e, type: 3}
-      propertyPath: m_AngularDrag
-      value: 0.01
-      objectReference: {fileID: 0}
     - target: {fileID: 7284030210718023620, guid: 864c013b0ac8cdb4bb9c893b4cf2ab0e, type: 3}
       propertyPath: m_Name
-      value: raceFuture
+      value: PlayerRacecar
       objectReference: {fileID: 0}
     - target: {fileID: 7952726160519980414, guid: 864c013b0ac8cdb4bb9c893b4cf2ab0e, type: 3}
       propertyPath: m_RootOrder
