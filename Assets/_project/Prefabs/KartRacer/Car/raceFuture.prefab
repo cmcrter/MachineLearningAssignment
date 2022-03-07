@@ -553,7 +553,7 @@ Rigidbody:
   m_GameObject: {fileID: 7284030210718023620}
   serializedVersion: 2
   m_Mass: 50
-  m_Drag: 5
+  m_Drag: 4.5
   m_AngularDrag: 0.01
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -599,7 +599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4546134727303796075}
-  AccelerationSpeed: 2
+  AccelerationSpeed: 2.15
   BrakeSpeed: 0.1
   steeringSpeed: 50
 --- !u!114 &919132147963318158
