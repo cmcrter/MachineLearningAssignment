@@ -31,7 +31,7 @@ public class MLFlappyAgent : Agent, IAgentable
     private BirdMovement CharacterActions;
 
     private bool tappedLastFrame = false;
-    private float height = 8f;
+    const float height = 8f;
 
     #endregion
 
@@ -62,6 +62,8 @@ public class MLFlappyAgent : Agent, IAgentable
         //1 action, to tap or not
         tappedLastFrame = Mathf.FloorToInt(actions.DiscreteActions[0]) == 1 ? true : false;
 
+        Debug.Log(actions.DiscreteActions[0]);
+
         if(tappedLastFrame)
         {
             CharacterActions.Tap();
@@ -71,19 +73,29 @@ public class MLFlappyAgent : Agent, IAgentable
     public override void CollectObservations(VectorSensor sensor)
     {
         //The height is the distance from the bottom to the center (used to normalize the values)
-        Vector3 nextPipePos = manager.GetNextPipe().localPosition;
+        Transform nextPipe = manager.GetNextPipe();
+        Vector3 nextPipePos = transform.position + (transform.forward * 15);
+
+        if(nextPipe)
+        {
+            nextPipePos = manager.GetNextPipe().localPosition;
+        }
+
         float vel = Mathf.Clamp(CharacterActions.GetYVel(), -height, height);
 
-        sensor.AddObservation(transform.localPosition.y / height);
-        sensor.AddObservation(vel / height);
-        sensor.AddObservation(nextPipePos.y / height);
-        sensor.AddObservation(nextPipePos.x);
-        sensor.AddObservation(tappedLastFrame ? 1f : -1f);
+        float[] observation = new float[5];
+
+        observation[0] = (transform.localPosition.y / height);
+        observation[1] = vel / height;
+        observation[2] = nextPipePos.y / height;
+        observation[3] = nextPipePos.z;
+        observation[4] = (tappedLastFrame ? 1f : -1f);
+        sensor.AddObservation(observation);
     }
 
     public override void WriteDiscreteActionMask(IDiscreteActionMask actionMask)
     {
-
+        actionMask.SetActionEnabled(0, 1, !tappedLastFrame);
     }
 
 

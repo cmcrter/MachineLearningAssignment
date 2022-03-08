@@ -58,6 +58,11 @@ public class WorldMover : MonoBehaviour
     void Start()
     {
         SetInitialPipes();
+
+        if(agent)
+        {
+            agent.OnEpisodeBegin();
+        }
     }
 
     void Update()
@@ -68,6 +73,13 @@ public class WorldMover : MonoBehaviour
         for(int i = 0; i < worldTransform.childCount; ++i)
         {
             worldTransform.GetChild(i).transform.position -= new Vector3(0, 0, movementSpeed * Time.deltaTime);
+        }
+
+        //Stopping the AI from tapping so quickly, that it has a greater force than the collision detection
+        if(player.transform.localPosition.y > 8 || player.transform.localPosition.y < -8)
+        {
+            agent.AddReward(-5f);
+            PlayerDied();
         }
     }
 
@@ -106,7 +118,6 @@ public class WorldMover : MonoBehaviour
     private void OnTakeFromPool(PipeSet go)
     {
         go.gameObject.SetActive(true);
-
         go.Initialise(this);
 
         if(currentlyActivePipes.Count > 0)
@@ -138,7 +149,7 @@ public class WorldMover : MonoBehaviour
     {        
         if(Debug.isDebugBuild)
         {
-            Debug.Log("Player Died");
+           // Debug.Log("Player Died");
         }
 
         if(agent)
@@ -227,6 +238,14 @@ public class WorldMover : MonoBehaviour
 
         SetInitialPipes();
 
+        if(agent)
+        {
+            if(agent.enabled)
+            {
+                agent.OnEpisodeBegin();
+            }
+        }
+
         gameActive = true;
     }
 
@@ -234,7 +253,8 @@ public class WorldMover : MonoBehaviour
     {
         for(int i = 0; i < startingPipes; ++i)
         {
-            pipeSetPool.Get().SetPosZ(i * pipeDistance);
+            PipeSet pipe = pipeSetPool.Get();
+            pipe.transform.position = new Vector3(transform.position.x, pipe.transform.position.y, i * pipeDistance);
         }
     }
 

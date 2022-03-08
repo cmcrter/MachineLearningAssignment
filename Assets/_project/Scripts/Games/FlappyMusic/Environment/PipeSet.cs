@@ -31,12 +31,12 @@ public class PipeSet : MonoBehaviour
     private void OnEnable()
     {
         float randHeight = Random.Range(-randomHeightVariance, randomHeightVariance);
-        transform.position = new Vector3(transform.position.x, randHeight, transform.position.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y + randHeight, transform.position.z);
     }
 
     void OnDisable()
     {
-        transform.position = new Vector3(0, 0, 10);
+        
     }
 
     #endregion

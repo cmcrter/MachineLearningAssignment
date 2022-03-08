@@ -1,0 +1,29 @@
+{
+    "FlappyMusic": {
+        "checkpoints": [
+            {
+                "steps": 93435,
+                "file_path": "results\\FlappyMusic\\FlappyMusic\\FlappyMusic-93435.onnx",
+                "reward": 0.6457141126905169,
+                "creation_time": 1646760016.4867668,
+                "auxillary_file_paths": [
+                    "results\\FlappyMusic\\FlappyMusic\\FlappyMusic-93435.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 93435,
+            "file_path": "results\\FlappyMusic\\FlappyMusic.onnx",
+            "reward": 0.6457141126905169,
+            "creation_time": 1646760016.4867668,
+            "auxillary_file_paths": [
+                "results\\FlappyMusic\\FlappyMusic\\FlappyMusic-93435.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.10.2+cu113"
+    }
+}
