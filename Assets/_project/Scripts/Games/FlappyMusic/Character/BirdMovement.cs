@@ -102,5 +102,10 @@ public class BirdMovement : MonoBehaviour
         rb.isKinematic = false;
     }
 
+    public float GetYVel()
+    {
+        return rb.velocity.y;
+    }
+
     #endregion
 }

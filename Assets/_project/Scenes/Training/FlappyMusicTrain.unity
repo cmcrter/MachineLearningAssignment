@@ -585,6 +585,7 @@ MonoBehaviour:
   worldTransform: {fileID: 2139499612}
   pipePrefab: {fileID: 1528330046820188083, guid: 2f5e626dc0bec9c4b88e55889c988ce6, type: 3}
   player: {fileID: 1584101898}
+  agent: {fileID: 0}
   movementSpeed: 3
   pipeDistance: 9
   startingPipes: 7
@@ -1004,5 +1005,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5352748350290634865, guid: 492da686feabd0046ac6754bc6b4c5a6, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 854647671}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 492da686feabd0046ac6754bc6b4c5a6, type: 3}

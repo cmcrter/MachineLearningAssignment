@@ -26,6 +26,8 @@ public class WorldMover : MonoBehaviour
 
     [SerializeField]
     private BirdMovement player;
+    [SerializeField]
+    private MLFlappyAgent agent;
 
     //This allows me to know the order of the pipes that are active
     private List<PipeSet> currentlyActivePipes = new List<PipeSet>();
@@ -139,6 +141,15 @@ public class WorldMover : MonoBehaviour
             Debug.Log("Player Died");
         }
 
+        if(agent)
+        {
+            if(agent.enabled)
+            {
+                agent.AddReward(-1f);
+                agent.EndEpisode();
+            }
+        }
+
         GameComplete();
     }
 
@@ -167,6 +178,31 @@ public class WorldMover : MonoBehaviour
         {
             scoreText.text = currentScore.ToString();
         }
+
+        if(agent)
+        {
+            if(agent.enabled)
+            {
+                agent.AddReward(5f);
+            }  
+        }
+    }
+    public Transform GetNextPipe()
+    {
+        float leftMost = float.MaxValue;
+        Transform leftChild = null;
+
+        foreach(Transform child in transform)
+        {
+            float childZ = child.localPosition.z;
+            if(childZ < leftMost && childZ > -.3f)
+            {
+                leftChild = child;
+                leftMost = child.localPosition.z;
+            }
+        }
+
+        return leftChild;
     }
 
     #endregion
