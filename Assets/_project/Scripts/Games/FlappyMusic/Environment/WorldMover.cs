@@ -43,6 +43,9 @@ public class WorldMover : MonoBehaviour
     private int pipePoolMaxSize = 10;
 
     [SerializeField]
+    private float randomHeightVariance = 4;
+
+    [SerializeField]
     private int currentScore = 0;
     [SerializeField]
     private TextMesh scoreText;
@@ -122,7 +125,8 @@ public class WorldMover : MonoBehaviour
 
         if(currentlyActivePipes.Count > 0)
         {
-            go.SetPosZ(currentlyActivePipes[currentlyActivePipes.Count - 1].transform.position.z + pipeDistance);
+            float randHeight = Random.Range(-randomHeightVariance, randomHeightVariance);
+            go.transform.position = new Vector3(0, worldTransform.position.y + randHeight, currentlyActivePipes[currentlyActivePipes.Count - 1].transform.position.z + pipeDistance);
         }
 
         currentlyActivePipes.Add(go);
@@ -203,13 +207,12 @@ public class WorldMover : MonoBehaviour
         float leftMost = float.MaxValue;
         Transform leftChild = null;
 
-        foreach(Transform child in transform)
+        foreach(Transform child in worldTransform)
         {
-            float childZ = child.localPosition.z;
-            if(childZ < leftMost && childZ > -.3f)
+            if(child.transform.position.z > player.transform.position.z && child.position.z < leftMost)
             {
                 leftChild = child;
-                leftMost = child.localPosition.z;
+                leftMost = child.position.z;
             }
         }
 
@@ -254,7 +257,9 @@ public class WorldMover : MonoBehaviour
         for(int i = 0; i < startingPipes; ++i)
         {
             PipeSet pipe = pipeSetPool.Get();
-            pipe.transform.position = new Vector3(transform.position.x, pipe.transform.position.y, i * pipeDistance);
+            float randHeight = Random.Range(-randomHeightVariance, randomHeightVariance);
+
+            pipe.transform.position = new Vector3(0, worldTransform.position.y + randHeight, i * pipeDistance);
         }
     }
 

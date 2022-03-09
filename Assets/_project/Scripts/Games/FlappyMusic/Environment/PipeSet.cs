@@ -14,9 +14,6 @@ public class PipeSet : MonoBehaviour
     #region Variables
 
     [SerializeField]
-    private float randomHeightVariance;
-
-    [SerializeField]
     private PipeTrigger pipeTrigger;
 
     #endregion
@@ -30,8 +27,7 @@ public class PipeSet : MonoBehaviour
 
     private void OnEnable()
     {
-        float randHeight = Random.Range(-randomHeightVariance, randomHeightVariance);
-        transform.position = new Vector3(transform.position.x, transform.position.y + randHeight, transform.position.z);
+
     }
 
     void OnDisable()

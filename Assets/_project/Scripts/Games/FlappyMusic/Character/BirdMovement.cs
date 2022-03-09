@@ -38,6 +38,16 @@ public class BirdMovement : MonoBehaviour
         rb = rb ?? GetComponent<Rigidbody>();
     }
 
+    private void OnEnable()
+    {
+        rb.velocity = Vector3.zero;
+    }
+
+    private void OnDisable()
+    {
+        rb.velocity = Vector3.zero;
+    }
+
     private void Start()
     {
         intitialPos = transform.position;
@@ -97,6 +107,7 @@ public class BirdMovement : MonoBehaviour
 
     public virtual void ResetPlayer()
     {
+        rb.velocity = Vector3.zero;
         transform.rotation = Quaternion.identity;
         transform.position = intitialPos;
         rb.isKinematic = false;

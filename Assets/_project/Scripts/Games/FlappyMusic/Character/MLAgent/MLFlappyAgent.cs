@@ -62,7 +62,7 @@ public class MLFlappyAgent : Agent, IAgentable
         //1 action, to tap or not
         tappedLastFrame = Mathf.FloorToInt(actions.DiscreteActions[0]) == 1 ? true : false;
 
-        Debug.Log(actions.DiscreteActions[0]);
+        //Debug.Log(actions.DiscreteActions[0]);
 
         if(tappedLastFrame)
         {
@@ -74,7 +74,7 @@ public class MLFlappyAgent : Agent, IAgentable
     {
         //The height is the distance from the bottom to the center (used to normalize the values)
         Transform nextPipe = manager.GetNextPipe();
-        Vector3 nextPipePos = transform.position + (transform.forward * 15);
+        Vector3 nextPipePos = transform.localPosition + (Vector3.forward * 15);
 
         if(nextPipe)
         {
@@ -90,6 +90,7 @@ public class MLFlappyAgent : Agent, IAgentable
         observation[2] = nextPipePos.y / height;
         observation[3] = nextPipePos.z;
         observation[4] = (tappedLastFrame ? 1f : -1f);
+
         sensor.AddObservation(observation);
     }
 
