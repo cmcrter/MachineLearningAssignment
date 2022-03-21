@@ -375,7 +375,7 @@ public class HummingbirdAgent : Agent
     private void TriggerEnterOrStay(Collider collider)
     {
         // Check if agent is colliding with nectar
-        if (collider.CompareTag("nectar"))
+        if (collider.gameObject.layer == 7)
         {
             Vector3 closestPointToBeakTip = collider.ClosestPoint(beakTip.position);
 

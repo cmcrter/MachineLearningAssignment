@@ -2,22 +2,22 @@
     "HummingBird": {
         "checkpoints": [
             {
-                "steps": 320,
-                "file_path": "results\\HummingBird\\HummingBird\\HummingBird-320.onnx",
-                "reward": null,
-                "creation_time": 1647871382.224381,
+                "steps": 12576,
+                "file_path": "results\\HummingBird\\HummingBird\\HummingBird-12576.onnx",
+                "reward": 0.0,
+                "creation_time": 1647872203.6282644,
                 "auxillary_file_paths": [
-                    "results\\HummingBird\\HummingBird\\HummingBird-320.pt"
+                    "results\\HummingBird\\HummingBird\\HummingBird-12576.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 320,
+            "steps": 12576,
             "file_path": "results\\HummingBird\\HummingBird.onnx",
-            "reward": null,
-            "creation_time": 1647871382.224381,
+            "reward": 0.0,
+            "creation_time": 1647872203.6282644,
             "auxillary_file_paths": [
-                "results\\HummingBird\\HummingBird\\HummingBird-320.pt"
+                "results\\HummingBird\\HummingBird\\HummingBird-12576.pt"
             ]
         }
     },

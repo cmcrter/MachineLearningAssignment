@@ -11,21 +11,28 @@ using UnityEngine;
 
 public class FinishLineTrigger : MonoBehaviour
 {
-    #region Public Fields
+    #region Variables
+
+    [SerializeField]
+    private RaceManager manager;
+    [SerializeField]
+    private int checkpointID;
+
     #endregion
- 
+
     #region Unity Methods
-    void Start()
+
+    private void OnTriggerEnter(Collider other)
     {
-	
+        if(other.TryGetComponent(out PlayerDriver driver))
+        {
+            manager.DriverCrossedFinishLine(driver);
+        }
+        else if(other.TryGetComponent(out MLDriver agent))
+        {
+            manager.DriverCrossedFinishLine(agent);
+        }
     }
- 
-    void Update()
-    {
-	
-    }
-    #endregion
- 
-    #region Private Methods
+
     #endregion
 }
