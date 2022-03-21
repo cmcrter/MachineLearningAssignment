@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TeamRed
   - TeamBlue
+  - Boundary
   layers:
   - Default
   - TransparentFX

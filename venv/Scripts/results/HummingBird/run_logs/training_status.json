@@ -1,0 +1,29 @@
+{
+    "HummingBird": {
+        "checkpoints": [
+            {
+                "steps": 320,
+                "file_path": "results\\HummingBird\\HummingBird\\HummingBird-320.onnx",
+                "reward": null,
+                "creation_time": 1647871382.224381,
+                "auxillary_file_paths": [
+                    "results\\HummingBird\\HummingBird\\HummingBird-320.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 320,
+            "file_path": "results\\HummingBird\\HummingBird.onnx",
+            "reward": null,
+            "creation_time": 1647871382.224381,
+            "auxillary_file_paths": [
+                "results\\HummingBird\\HummingBird\\HummingBird-320.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.10.2+cu113"
+    }
+}
