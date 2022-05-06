@@ -3,7 +3,7 @@
 // Author: Charles Carter
 // Date Created: 05/03/22
 // Last Edited By: Charles Carter
-// Date Last Edited: 05/03/22
+// Date Last Edited: 06/05/22
 // Brief: The player's controller script to drive
 //////////////////////////////////////////////////////////// 
 
@@ -15,6 +15,9 @@ public class PlayerDriver : MonoBehaviour
 
     [SerializeField]
     private RacecarMovement actions;
+
+    public int checkpointNum = 0;
+    public int lapCount = 0;
 
     #endregion
 

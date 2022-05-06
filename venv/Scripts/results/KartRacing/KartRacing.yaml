@@ -1,0 +1,9 @@
+behaviors:
+  Kart:
+        trainer_type: ppo    
+        summary_freq: 10000
+        network_settings:
+            hidden_units: 256
+            normalize: true
+        checkpoint_interval: 500000
+        max_steps: 5000000000000

@@ -26,8 +26,7 @@ public class RacecarMovement : MonoBehaviour, IControllable
 
     #region Variables
 
-    [SerializeField]
-    private Rigidbody rb;
+    public Rigidbody rb;
 
     [SerializeField]
     private float AccelerationSpeed = 1f;

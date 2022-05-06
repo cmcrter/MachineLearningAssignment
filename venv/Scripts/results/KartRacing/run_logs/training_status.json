@@ -1,0 +1,65 @@
+{
+    "Kart": {
+        "checkpoints": [
+            {
+                "steps": 999970,
+                "file_path": "results\\KartRacing\\Kart\\Kart-999970.onnx",
+                "reward": 7.540498631199201,
+                "creation_time": 1651843776.8296359,
+                "auxillary_file_paths": [
+                    "results\\KartRacing\\Kart\\Kart-999970.pt"
+                ]
+            },
+            {
+                "steps": 1499966,
+                "file_path": "results\\KartRacing\\Kart\\Kart-1499966.onnx",
+                "reward": -5.118000158667565,
+                "creation_time": 1651844253.0308895,
+                "auxillary_file_paths": [
+                    "results\\KartRacing\\Kart\\Kart-1499966.pt"
+                ]
+            },
+            {
+                "steps": 1999962,
+                "file_path": "results\\KartRacing\\Kart\\Kart-1999962.onnx",
+                "reward": 41.78049652501941,
+                "creation_time": 1651844759.4602842,
+                "auxillary_file_paths": [
+                    "results\\KartRacing\\Kart\\Kart-1999962.pt"
+                ]
+            },
+            {
+                "steps": 2499990,
+                "file_path": "results\\KartRacing\\Kart\\Kart-2499990.onnx",
+                "reward": -3.4880001075565814,
+                "creation_time": 1651845252.8073106,
+                "auxillary_file_paths": [
+                    "results\\KartRacing\\Kart\\Kart-2499990.pt"
+                ]
+            },
+            {
+                "steps": 2658430,
+                "file_path": "results\\KartRacing\\Kart\\Kart-2658430.onnx",
+                "reward": -1.8195000246167183,
+                "creation_time": 1651845410.7788298,
+                "auxillary_file_paths": [
+                    "results\\KartRacing\\Kart\\Kart-2658430.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2658430,
+            "file_path": "results\\KartRacing\\Kart.onnx",
+            "reward": -1.8195000246167183,
+            "creation_time": 1651845410.7788298,
+            "auxillary_file_paths": [
+                "results\\KartRacing\\Kart\\Kart-2658430.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.10.2+cu113"
+    }
+}

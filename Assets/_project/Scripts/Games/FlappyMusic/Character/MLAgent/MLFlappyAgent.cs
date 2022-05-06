@@ -99,7 +99,6 @@ public class MLFlappyAgent : Agent, IAgentable
         actionMask.SetActionEnabled(0, 1, !tappedLastFrame);
     }
 
-
     #endregion
 
     #region Private Methods

@@ -15,8 +15,6 @@ public class FinishLineTrigger : MonoBehaviour
 
     [SerializeField]
     private RaceManager manager;
-    [SerializeField]
-    private int checkpointID;
 
     #endregion
 

@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619702072}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.11, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7952726160519980414}
@@ -518,7 +518,7 @@ GameObject:
   - component: {fileID: 4233621152142471631}
   - component: {fileID: 919132147963318158}
   m_Layer: 9
-  m_Name: raceFuture
+  m_Name: PlayerRacecar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -586,6 +586,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actions: {fileID: 4233621152142471631}
+  checkpointNum: 0
+  lapCount: 0
 --- !u!114 &4233621152142471631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,21 +616,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99dfce74154f244458dbb3dc210ddc9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 75
-  viewAngle: 360
-  targetMask:
+  MaxRayDist: 25
+  rayFrom: {fileID: 619702073}
+  thisLayer:
     serializedVersion: 2
-    m_Bits: 128
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 256
-  visibleTargets: []
-  obstacles: []
-  meshResolution: 2
-  edgeResolveIterations: 1
-  edgeDstThreshold: 0.5
-  maskCutawayDst: 0.1
-  viewMeshFilter: {fileID: 619702076}
-  viewMesh: {fileID: 0}
-  SensorPosition: {fileID: 619702073}
-  hitPositions: []
+    m_Bits: 640
