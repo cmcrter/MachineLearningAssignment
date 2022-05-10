@@ -75,6 +75,24 @@ public class RaceManager : MonoBehaviour
             UI.StopLapTimer();
             StartCoroutine(Co_StartNextRace());
         }
+        else
+        {
+            int playersCompleted = 0;
+
+            foreach(MLDriver driver in MLDrivers)
+            {
+                if(driver.lapCount == 1)
+                {
+                    playersCompleted++;
+                }
+            }
+
+            if(playersCompleted == MLDrivers.Count)
+            {
+                UI.StopLapTimer();
+                StartCoroutine(Co_StartNextRace());
+            }
+        }
     }
 
     #endregion

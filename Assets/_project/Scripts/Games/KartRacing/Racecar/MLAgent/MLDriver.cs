@@ -43,11 +43,8 @@ public class MLDriver : Agent /*, IAgentable*/
 
     private void OnCollisionEnter(Collision collision)
     {
-        foreach(ContactPoint contact in collision.contacts)
-        {
-            Debug.Log("Collided:" + contact.otherCollider.name);
-            AddReward(-0.2f);
-        }
+        int rewardLoss = collision.contactCount * -5;
+        AddReward(rewardLoss);
     }
 
     #endregion

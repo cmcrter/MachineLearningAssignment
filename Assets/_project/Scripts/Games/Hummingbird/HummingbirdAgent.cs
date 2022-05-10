@@ -125,7 +125,7 @@ public class HummingbirdAgent : Agent
         if (frozen) return;
 
         // Calculate movement vector
-        Vector3 move = new Vector3(vectorAction.DiscreteActions[0], vectorAction.DiscreteActions[1], vectorAction.DiscreteActions[2]);
+        Vector3 move = new Vector3(vectorAction.ContinuousActions[0], vectorAction.ContinuousActions[1], vectorAction.ContinuousActions[2]);
 
         // Add force in the direction of the move vector
         rb.AddForce(move * moveForce);
@@ -134,8 +134,8 @@ public class HummingbirdAgent : Agent
         Vector3 rotationVector = transform.rotation.eulerAngles;
 
         // Calculate pitch and yaw rotation
-        float pitchChange = vectorAction.DiscreteActions[3];
-        float yawChange = vectorAction.DiscreteActions[4];
+        float pitchChange = vectorAction.ContinuousActions[3];
+        float yawChange = vectorAction.ContinuousActions[4];
 
         // Calculate smooth rotation changes
         smoothPitchChange = Mathf.MoveTowards(smoothPitchChange, pitchChange, 2f * Time.fixedDeltaTime);
@@ -245,7 +245,7 @@ public class HummingbirdAgent : Agent
     /// </summary>
     public void FreezeAgent()
     {
-        Debug.Assert(trainingMode == false, "Freeze/Unfreeze not supported in training");
+        //Debug.Assert(trainingMode == false, "Freeze/Unfreeze not supported in training");
         frozen = true;
         rb.Sleep();
     }
@@ -255,7 +255,7 @@ public class HummingbirdAgent : Agent
     /// </summary>
     public void UnfreezeAgent()
     {
-        Debug.Assert(trainingMode == false, "Freeze/Unfreeze not supported in training");
+       // Debug.Assert(trainingMode == false, "Freeze/Unfreeze not supported in training");
         frozen = false;
         rb.WakeUp();
     }
