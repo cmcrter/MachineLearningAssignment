@@ -12,8 +12,15 @@ using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using UnityEngine;
 
+public enum ShooterGameOutcome
+{
+    Win,
+    Lose,
+    Draw
+}
+
 [RequireComponent(typeof(CharacterActions))]
-public class MLInputManager : Agent, IAgentable
+public class MLShooter : Agent, IAgentable
 {
     #region Interface Contracts
 
@@ -24,6 +31,9 @@ public class MLInputManager : Agent, IAgentable
     #endregion
 
     #region Variables
+
+    [SerializeField]
+    private ShooterInstanceManager instanceManager;    
 
     [SerializeField]
     private CharacterActions actions;
@@ -73,9 +83,32 @@ public class MLInputManager : Agent, IAgentable
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        //Environment Observations (Should only contain information about seen objects, and 0s for the rest?)
-        //Environment Objects within your FOV
-        //Important Objects visible out of potential objects visible (including type)
+        //Environment Objects within your FOV (the position amounts should be the same)
+        //for()
+        //{
+        //  Looping through the objects seen and adding the relative positions and what they are 
+        //}
+
+        //Important Objects visible out of potential objects visible (including type), the number should be the same each time
+        //for()
+        //{
+        //  Looping through the guns available
+        //}
+
+        //Adding if the AI is holding a gun
+        //Relative position of the barrel to the AI
+
+        //Direction faced by this AI
+
+        //Position of this AI
+
+        //Health
+
+        //Environment Observations (Could be incomplete)
+        //for()
+        //{
+        //  Looping through the bullets, and seeing where they are and which direction they're going and what speed (reserve space for all potential used size of object pools)
+        //}
     }
 
     public override void WriteDiscreteActionMask(IDiscreteActionMask actionMask)
@@ -112,17 +145,17 @@ public class MLInputManager : Agent, IAgentable
     public void CollectReward(int endState)
     {
         //Round Draw
-        if(endState == 0)
+        if(endState == (int)ShooterGameOutcome.Draw)
         {
-
+            
         }
         //Round Win
-        else if (endState == 1)
+        else if (endState == (int)ShooterGameOutcome.Win)
         {
         
         }
         //Round Lose
-        else if(endState == 2)
+        else if(endState == (int)ShooterGameOutcome.Lose)
         {
 
         }

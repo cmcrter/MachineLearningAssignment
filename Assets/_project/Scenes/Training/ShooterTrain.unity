@@ -3239,6 +3239,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  instanceManager: {fileID: 1171612708}
   actions: {fileID: 774963829}
   characterPickup: {fileID: 677878914}
 --- !u!114 &774963829
@@ -3253,8 +3254,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a954fbc92742224cab97fc00fe401e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementController: {fileID: 0}
-  characterTrigger: {fileID: 0}
+  movementController: {fileID: 774963824}
+  characterTrigger: {fileID: 677878914}
   BaseRotationSpeed: 150
   BaseMovementSpeed: 4
   CurrentMovementSpeed: 0

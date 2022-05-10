@@ -28,7 +28,7 @@ public class ShooterInstanceManager : MonoBehaviour
     private TrainingType currentTraining;
 
     [SerializeField]
-    private List<MLInputManager> Agents;
+    private List<MLShooter> Agents;
     private CharacterInputManager Player;
 
     [Header("Round Timer Variables")]
