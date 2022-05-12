@@ -36,6 +36,11 @@ public class CharacterHealth : MonoBehaviour, IDamageable
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, fullHealth);
 
+        if(shooter)
+        {
+            shooter.AddReward(-1f);
+        }
+
         UpdateUI(currentHealth / fullHealth);
 
         if(isCharacterDead())
@@ -61,7 +66,13 @@ public class CharacterHealth : MonoBehaviour, IDamageable
     #region Variables
 
     [SerializeField]
+    ShooterInstanceManager instanceManager;
+
+    [SerializeField]
     CharacterInputManager mainCharacterManager;
+
+    [SerializeField]
+    MLShooter shooter;
 
     [SerializeField]
     private float currentHealth;
@@ -77,9 +88,14 @@ public class CharacterHealth : MonoBehaviour, IDamageable
     [SerializeField]
 	private Transform CameraToFace;
 
-#endregion
+    public float charHealth
+    {
+        get => currentHealth;
+    }
 
-#region Unity Methods
+    #endregion
+
+    #region Unity Methods
 
     private void Start()
     {
@@ -96,6 +112,12 @@ public class CharacterHealth : MonoBehaviour, IDamageable
     #endregion
 
     #region Private Methods
+
+    public void ResetHealth()
+    {
+        currentHealth = fullHealth;
+        UpdateUI(1f);
+    }
 
     public void UpdateUI(float normalizedHealth)
     {
@@ -143,9 +165,9 @@ public class CharacterHealth : MonoBehaviour, IDamageable
     {
         yield return new WaitForSeconds(0.5f);
 
-        if(mainCharacterManager)
+        if(instanceManager && shooter)
         {
-            //mainCharacterManager.
+            instanceManager.CharacterDied(shooter);
         }
     }
 

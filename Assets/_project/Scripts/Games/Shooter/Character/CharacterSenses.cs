@@ -76,6 +76,12 @@ public class CharacterSenses : MonoBehaviour
 		}
 	}
 
+	public List<Vector3> GetFOV()
+	{
+		return hitPositions;
+	}
+
+
 	private void FindVisibleTargets()
 	{
 		visibleTargets.Clear();
@@ -100,6 +106,8 @@ public class CharacterSenses : MonoBehaviour
 
 	private void DrawFieldOfView()
 	{
+		hitPositions.Clear();
+
 		int stepCount = Mathf.RoundToInt(viewAngle * meshResolution);
 		float stepAngleSize = viewAngle / stepCount;
 		List<Vector3> viewPoints = new List<Vector3>();

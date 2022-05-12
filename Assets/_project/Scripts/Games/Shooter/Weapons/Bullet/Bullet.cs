@@ -20,6 +20,9 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private float Damage;
 
+    [SerializeField]
+    private MLShooter shooterOfBullet;
+
     #endregion
  
     #region Unity Methods
@@ -36,8 +39,16 @@ public class Bullet : MonoBehaviour
 
     #region Public Methods
 
-    public void Fired(Vector3 direction, float force)
+    public Rigidbody GetRB()
     {
+        return rb;
+    }
+
+    public void Fired(Vector3 direction, float force, MLShooter shooter)
+    {
+        shooterOfBullet = shooter;
+        instanceManager = shooterOfBullet.instanceManager;
+
         gameObject.SetActive(true);
 
         rb.isKinematic = false;
@@ -56,21 +67,25 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other.TryGetComponent<MLShooter>(out var lShooter))
+        {
+            if(shooterOfBullet == lShooter)
+            {
+                return;
+            }
+        }
+
         if(other.TryGetComponent(out IDamageable damageable))
         {
             if(damageable.canDamage)
             {
                 damageable.Damaged(Damage);
+                instanceManager.RewardShooter(shooterOfBullet);
             }
         }
 
-        if(!instanceManager)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         instanceManager.bulletPool.Release(gameObject);
+        shooterOfBullet = null;
     }
 
     #endregion

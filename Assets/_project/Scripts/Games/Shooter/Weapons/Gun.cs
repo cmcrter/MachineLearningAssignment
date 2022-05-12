@@ -19,7 +19,7 @@ public class Gun : MonoBehaviour, IEquipable
     bool IEquipable.canPickup => bPickupable;
 
     void IEquipable.Drop(Vector3 direction, float power, Transform parent) => DropGun(direction, power, parent);
-    void IEquipable.Pickup(Transform handPos, int LayerToGoTo) => PickupGun(handPos, LayerToGoTo);
+    void IEquipable.Pickup(Transform handPos, int LayerToGoTo, MLShooter shooter) => PickupGun(handPos, LayerToGoTo, shooter);
 
     void IEquipable.UseEquippable() => FireGun();
 
@@ -50,6 +50,14 @@ public class Gun : MonoBehaviour, IEquipable
     [SerializeField]
     private float shotCooldownDuration = 0.3f;
 
+    private MLShooter holder;
+
+    private Vector3 startPos;
+    private Quaternion startRot;
+
+    [SerializeField]
+    int gunLayer;
+
     #endregion
 
     #region Public Methods
@@ -63,7 +71,13 @@ public class Gun : MonoBehaviour, IEquipable
 
     #region Private Methods
 
-    private void PickupGun(Transform handPos, int layer)
+    private void Awake()
+    {
+        startPos = transform.position;
+        startRot = transform.rotation;
+    }
+
+    private void PickupGun(Transform handPos, int layer, MLShooter shooter)
     {
         gameObject.layer = layer;
 
@@ -73,17 +87,22 @@ public class Gun : MonoBehaviour, IEquipable
         transform.position = handPos.position;
         transform.rotation = handPos.rotation;
         transform.SetParent(handPos);
+
+        holder = shooter;
+        holder.AddReward(0.25f);
     }
 
     private void DropGun(Vector3 direction, float power, Transform newParent)
     {
         transform.SetParent(newParent);
-        gameObject.layer = 0;
+        gameObject.layer = gunLayer;
         rb.isKinematic = false;
 
         rb.AddRelativeForce(direction * power, ForceMode.Impulse);
 
         StartCoroutine(Co_PickUpCooldown());
+
+        holder = null;
     }
 
     private void FireGun()
@@ -109,7 +128,7 @@ public class Gun : MonoBehaviour, IEquipable
         //Firing the bullet out
         if(bulletToUse.TryGetComponent(out Bullet bullet))
         {
-            bullet.Fired(barrellPos.transform.forward, 45f);
+            bullet.Fired(barrellPos.transform.forward, 45f, holder);
         }
 
         StartCoroutine(Co_ShootCooldown());
@@ -126,6 +145,15 @@ public class Gun : MonoBehaviour, IEquipable
         canFire = false;
         yield return new WaitForSeconds(shotCooldownDuration);
         canFire = true;
+    }
+
+    public void ResetGun()
+    {
+        transform.SetParent(null);
+        transform.position = startPos;
+        transform.rotation = startRot;
+        gameObject.layer = gunLayer;
+        rb.isKinematic = false;
     }
 
     #endregion

@@ -31,6 +31,12 @@ public class ShooterInstanceManager : MonoBehaviour
     private List<MLShooter> Agents;
     private CharacterInputManager Player;
 
+    [SerializeField]
+    private List<Transform> startPoints;
+
+    [SerializeField]
+    private List<CharacterActions> pickups;
+
     [Header("Round Timer Variables")]
     [SerializeField]
     private float RoundDuration = 300f;
@@ -44,13 +50,12 @@ public class ShooterInstanceManager : MonoBehaviour
     [SerializeField]
     private GameObject bulletPrefab;
     public IObjectPool<GameObject> bullets;
-    [SerializeField]
-    private int bulletPoolMaxSize = 50;
+    public int bulletPoolMaxSize = 50;
     [SerializeField]
     private List<Gun> guns;
     public bool collectionChecks = true;
     [SerializeField]
-    Transform bulletParent;
+    Transform bulletParent;    
 
     #endregion
 
@@ -65,18 +70,68 @@ public class ShooterInstanceManager : MonoBehaviour
         {
             gun.InstialiseGun(bullets);
         }
-
-        roundTime = new Timer(RoundDuration);
     }
 
-    private void OnEnable()
+    private void Start()
     {
+        CallRestartInstance();
+    }
+
+    #endregion
+
+    #region Public Methods
+
+    public void CallRestartInstance()
+    {
+        for(int i = 0; i < Agents.Count; ++i)
+        {
+            Agents[i].transform.position = startPoints[i].transform.position;
+            Agents[i].transform.rotation = startPoints[i].transform.rotation;
+            Agents[i].ResetStats();
+            Agents[i].OnEpisodeBegin();
+        }
+
+        foreach(CharacterActions pickup in pickups)
+        {
+            pickup.Drop();
+        }
+
+        foreach(Gun gun in guns)
+        {
+            gun.ResetGun();
+        }
+
         if(roundCoroutine != null)
         {
             roundCoroutine = null;
         }
 
         roundCoroutine = StartCoroutine(Co_RoundTimer());
+    }
+
+    public void CharacterDied(MLShooter shooterThatDied)
+    {
+        foreach(MLShooter shooter in Agents)
+        {
+            if(shooter == shooterThatDied)
+            {
+                shooter.CollectReward((int)ShooterGameOutcome.Lose);
+            }
+            else
+            {
+                shooter.CollectReward((int)ShooterGameOutcome.Win);
+            }
+        }
+
+        CallRestartInstance();
+    }
+
+    public void RewardShooter(MLShooter shooter)
+    {
+        if(shooter)
+        {
+            shooter.AddReward(5f);
+        }
     }
 
     #endregion
@@ -125,10 +180,9 @@ public class ShooterInstanceManager : MonoBehaviour
 
     private IEnumerator Co_RoundTimer()
     {
-        //A loop of the round timer to play whilst the game is played
-        UpdateUI();
-        yield return new WaitForSeconds(1.0f);
+        roundTime = new Timer(RoundDuration);
 
+        //A loop of the round timer to play whilst the game is played
         while(roundTime.isActive)
         {
             roundTime.Tick(Time.deltaTime);
@@ -158,13 +212,19 @@ public class ShooterInstanceManager : MonoBehaviour
 
     private void RoundOver()
     {
-        
+        foreach(MLShooter shooter in Agents)
+        {
+            shooter.CollectReward((int)ShooterGameOutcome.Draw);
+            shooter.EndEpisode();
+        }
+
+        CallRestartInstance();
     }
 
     //A player has died, checking whether this round is over
     private void CheckRoundOverCondition()
     {
-    
+        
     }
 
     #endregion

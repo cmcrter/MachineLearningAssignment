@@ -25,6 +25,9 @@ public class CharacterPickupTrigger : MonoBehaviour
 
     public bool bEquipped = false;
 
+    [SerializeField]
+    MLShooter shooter;
+
     #endregion
 
     #region Unity Methods
@@ -44,11 +47,13 @@ public class CharacterPickupTrigger : MonoBehaviour
                     ThrowEquippable();
                 }
 
-                equippable.Pickup(handTransform, gameObject.layer);
+                equippable.Pickup(handTransform, gameObject.layer, shooter);
 
                 currentlyEquipped = equippable;
                 equipObj = equippable.transform;
                 bEquipped = true;
+
+                shooter.AddReward(1f);
             }
         }
     }
@@ -79,6 +84,8 @@ public class CharacterPickupTrigger : MonoBehaviour
         currentlyEquipped = null;
         equipObj = null;
         bEquipped = false;
+
+        shooter.AddReward(-3f);
     }
 
     #endregion
