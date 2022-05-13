@@ -4,7 +4,7 @@ behaviors:
     hyperparameters:
       batch_size: 32
       buffer_size: 512
-      learning_rate: 3e-4
+      learning_rate: 1e-3
       epsilon: 0.3
       lambd: 0.99
       num_epoch: 7
@@ -19,13 +19,13 @@ behaviors:
         gamma: 0.99
         strength: 1.0
     keep_checkpoints: 5
-    max_steps: 10000000
+    max_steps: 50000000
     time_horizon: 32
     summary_freq: 1000
     threaded: false
     self_play:
-      save_steps: 200
-      swap_steps: 1000
-      window: 20
-      play_against_latest_model_ratio: 0.5
-      initial_elo: 1200.0
+      save_steps: 20000
+      swap_steps: 100000
+      window: 15
+      play_against_latest_model_ratio: 0.8
+      initial_elo: 800

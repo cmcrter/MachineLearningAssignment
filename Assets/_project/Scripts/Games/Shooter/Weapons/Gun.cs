@@ -17,9 +17,10 @@ public class Gun : MonoBehaviour, IEquipable
 
     Transform IEquipable.transform => transform;
     bool IEquipable.canPickup => bPickupable;
+    bool IEquipable.canShoot => canFire;
 
     void IEquipable.Drop(Vector3 direction, float power, Transform parent) => DropGun(direction, power, parent);
-    void IEquipable.Pickup(Transform handPos, int LayerToGoTo, MLShooter shooter) => PickupGun(handPos, LayerToGoTo, shooter);
+    void IEquipable.Pickup(Transform handPos, MLShooter shooter) => PickupGun(handPos, shooter);
 
     void IEquipable.UseEquippable() => FireGun();
 
@@ -38,8 +39,6 @@ public class Gun : MonoBehaviour, IEquipable
 
     [SerializeField]
     private Rigidbody rb;
-
-    IObjectPool<GameObject> currentbulletpool;
 
     [SerializeField]
     private Transform barrellPos;
@@ -62,11 +61,6 @@ public class Gun : MonoBehaviour, IEquipable
 
     #region Public Methods
 
-    public void InstialiseGun(IObjectPool<GameObject> bulletpool)
-    {
-        currentbulletpool = bulletpool;
-    }
-
     #endregion
 
     #region Private Methods
@@ -77,9 +71,14 @@ public class Gun : MonoBehaviour, IEquipable
         startRot = transform.rotation;
     }
 
-    private void PickupGun(Transform handPos, int layer, MLShooter shooter)
+    private void Start()
     {
-        gameObject.layer = layer;
+        instanceManager = ShooterInstanceManager.instance;
+    }
+
+    private void PickupGun(Transform handPos, MLShooter shooter)
+    {
+        gameObject.layer = shooter.gameObject.layer;
 
         bPickupable = false;
         rb.isKinematic = true;
@@ -112,12 +111,7 @@ public class Gun : MonoBehaviour, IEquipable
             return;
         }
 
-        if(currentbulletpool == null)
-        {
-            currentbulletpool = instanceManager.bulletPool;
-        }
-
-        GameObject bulletToUse = currentbulletpool.Get();
+        GameObject bulletToUse = instanceManager.bulletPool.Get();
 
         //So the bullet doesn't collide with the gun/player when it turns on
         bulletToUse.layer = gameObject.layer;

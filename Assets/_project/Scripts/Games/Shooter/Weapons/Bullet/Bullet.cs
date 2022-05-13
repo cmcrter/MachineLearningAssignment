@@ -30,11 +30,12 @@ public class Bullet : MonoBehaviour
     {
 	
     }
- 
-    void Update()
+
+    private void OnEnable()
     {
-	
+        instanceManager = ShooterInstanceManager.instance;
     }
+
     #endregion
 
     #region Public Methods
@@ -46,6 +47,8 @@ public class Bullet : MonoBehaviour
 
     public void Fired(Vector3 direction, float force, MLShooter shooter)
     {
+        gameObject.layer = shooter.gameObject.layer;
+
         shooterOfBullet = shooter;
         instanceManager = shooterOfBullet.instanceManager;
 
@@ -67,23 +70,17 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent<MLShooter>(out var lShooter))
-        {
-            if(shooterOfBullet == lShooter)
-            {
-                return;
-            }
-        }
-
         if(other.TryGetComponent(out IDamageable damageable))
         {
             if(damageable.canDamage)
             {
                 damageable.Damaged(Damage);
                 instanceManager.RewardShooter(shooterOfBullet);
+                shooterOfBullet.bShotSomething = true;
             }
         }
 
+        //Debug.Log("This Hit: " + other.name + " this is the shooter: " + shooterOfBullet.name);
         instanceManager.bulletPool.Release(gameObject);
         shooterOfBullet = null;
     }

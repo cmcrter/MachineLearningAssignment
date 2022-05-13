@@ -26,8 +26,7 @@ public class CharacterActions : MonoBehaviour, IControllable
 
     #region Variables
 
-    [SerializeField]
-    private CharacterController movementController;
+    public CharacterController movementController;
     [SerializeField]
     private CharacterPickupTrigger characterTrigger;
 

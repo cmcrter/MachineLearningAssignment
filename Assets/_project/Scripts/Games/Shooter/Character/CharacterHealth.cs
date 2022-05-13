@@ -38,7 +38,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable
 
         if(shooter)
         {
-            shooter.AddReward(-1f);
+            shooter.AddReward(-0.25f);
         }
 
         UpdateUI(currentHealth / fullHealth);

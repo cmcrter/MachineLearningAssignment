@@ -24,6 +24,8 @@ public class ShooterInstanceManager : MonoBehaviour
 
     #region Variables
 
+    public static ShooterInstanceManager instance;
+
     [SerializeField]
     private TrainingType currentTraining;
 
@@ -55,7 +57,9 @@ public class ShooterInstanceManager : MonoBehaviour
     private List<Gun> guns;
     public bool collectionChecks = true;
     [SerializeField]
-    Transform bulletParent;    
+    Transform bulletParent;
+
+    Coroutine peaceCoroutine;
 
     #endregion
 
@@ -63,13 +67,16 @@ public class ShooterInstanceManager : MonoBehaviour
 
     private void Awake()
     {
-        bullets = new LinkedPool<GameObject>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, collectionChecks, bulletPoolMaxSize);
-
-        //Going through the guns already on the level and setting them up
-        foreach(Gun gun in guns)
+        if(instance)
         {
-            gun.InstialiseGun(bullets);
+            Destroy(this);
         }
+        else
+        {
+            instance = this;
+        }
+
+        bullets = new LinkedPool<GameObject>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, collectionChecks, bulletPoolMaxSize);
     }
 
     private void Start()
@@ -81,13 +88,41 @@ public class ShooterInstanceManager : MonoBehaviour
 
     #region Public Methods
 
+    public float GetDirBetweenAgents(MLShooter shootingAgent)
+    {
+        List<Vector3> directions = new List<Vector3>();
+        float score = 0;
+
+        foreach(MLShooter shooter in Agents)
+        {
+            if(shooter == shootingAgent || !shootingAgent.senses.obstacles.Contains(shooter.transform))
+            {
+                continue;
+            }
+
+            if(shooter.gameObject.layer != shootingAgent.gameObject.layer)
+            {
+                directions.Add((shooter.transform.position - shootingAgent.transform.position).normalized);
+            }
+        }
+
+        foreach(Vector3 direction in directions)
+        {
+            score += Vector3.Dot(direction, shootingAgent.transform.forward);
+        }
+
+        return score;
+    }
+
     public void CallRestartInstance()
     {
         for(int i = 0; i < Agents.Count; ++i)
         {
+            Agents[i].characterActions.movementController.enabled = false;
             Agents[i].transform.position = startPoints[i].transform.position;
             Agents[i].transform.rotation = startPoints[i].transform.rotation;
             Agents[i].ResetStats();
+            Agents[i].characterActions.movementController.enabled = true;
             Agents[i].OnEpisodeBegin();
         }
 
@@ -106,7 +141,10 @@ public class ShooterInstanceManager : MonoBehaviour
             roundCoroutine = null;
         }
 
+        peaceCoroutine = null;
+
         roundCoroutine = StartCoroutine(Co_RoundTimer());
+        peaceCoroutine = StartCoroutine(Co_PeaceStopper());
     }
 
     public void CharacterDied(MLShooter shooterThatDied)
@@ -195,6 +233,28 @@ public class ShooterInstanceManager : MonoBehaviour
         roundCoroutine = null;
     }
 
+    private IEnumerator Co_PeaceStopper()
+    {
+        while(roundCoroutine != null)
+        {
+            yield return new WaitForSeconds(10f);
+
+            foreach(MLShooter shooter in Agents)
+            {
+                if(shooter.bShotSomething)
+                {
+                    shooter.AddReward(1f);
+                }
+                else
+                {
+                    shooter.AddReward(-1f);
+                }
+
+                shooter.bShotSomething = false;
+            }
+        }
+    }
+
     private void UpdateUI()
     {
         if(RoundTimerText == null) return;
@@ -212,9 +272,28 @@ public class ShooterInstanceManager : MonoBehaviour
 
     private void RoundOver()
     {
+        float difference = Agents[0].health.charHealth - Agents[1].health.charHealth;
+        float rewardDiff = (difference / 10f);
+    
+        if(difference > 0)
+        {
+            Agents[0].AddReward(rewardDiff);
+            Agents[1].AddReward(rewardDiff * -1f);
+        }
+        else if(Agents[1].health.charHealth > Agents[0].health.charHealth)
+        {
+            Agents[1].AddReward(rewardDiff);
+            Agents[0].AddReward(rewardDiff * -1f);
+        }
+        else 
+        {
+            Agents[1].CollectReward((int)ShooterGameOutcome.Draw);
+            Agents[0].CollectReward((int)ShooterGameOutcome.Draw);
+        }
+
         foreach(MLShooter shooter in Agents)
         {
-            shooter.CollectReward((int)ShooterGameOutcome.Draw);
+
             shooter.EndEpisode();
         }
 

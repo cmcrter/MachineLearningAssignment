@@ -33,19 +33,17 @@ public class MLShooter : Agent, IAgentable
 
     #region Variables
 
-    public ShooterInstanceManager instanceManager;    
+    public ShooterInstanceManager instanceManager;
+
+    public CharacterActions characterActions;
+    public CharacterPickupTrigger characterPickup;
+    public CharacterSenses senses;
+    public CharacterHealth health;
 
     [SerializeField]
-    private CharacterActions characterActions;
+    private Transform bulletParent;
 
-    [SerializeField]
-    private CharacterPickupTrigger characterPickup;
-
-    [SerializeField]
-    private CharacterSenses senses;
-
-    [SerializeField]
-    private CharacterHealth health;
+    public bool bShotSomething = false;
 
     #endregion
 
@@ -111,6 +109,11 @@ public class MLShooter : Agent, IAgentable
                 // 3 - Equip (Action type)
                 // 3.1 - Shoot (Action)
                 characterActions.Shoot();
+
+                if(characterPickup.bCanShoot())
+                {
+                    AddReward(instanceManager.GetDirBetweenAgents(this) * 2f);
+                }
                 break;
             //case 8:
             //    // 3.2 - Drop (Action)
@@ -121,25 +124,6 @@ public class MLShooter : Agent, IAgentable
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        //Important Objects visible out of potential objects visible (including type), the number should be the same each time
-        for(int i = 0; i < senses.visibleTargets.Count; ++i)
-        {
-            //3
-            sensor.AddObservation(senses.visibleTargets[i].transform.localPosition);
-            //1
-            sensor.AddObservation(senses.visibleTargets[i].gameObject.layer);
-            //Looping through the objects seen and adding the positions and what they are
-        }
-
-        for(int i = 0; i < senses.obstacles.Count; ++i)
-        {
-            //3
-            sensor.AddObservation(senses.obstacles[i].transform.localPosition);
-            //1
-            sensor.AddObservation(senses.obstacles[i].gameObject.layer);
-            //Looping through the objects seen and adding the positions and what they are
-        }
-
         List<Vector3> hitPoints = senses.GetFOV();
 
         //Environment Objects within your FOV (the position amounts should be the same)
@@ -152,47 +136,92 @@ public class MLShooter : Agent, IAgentable
 
         //Adding if the AI is holding a gun
         sensor.AddObservation(characterPickup.bEquipped);
+        sensor.AddObservation(characterPickup.bCanShoot());
 
         //Direction faced by this AI
         sensor.AddObservation(transform.forward);
 
         //Position of this AI
-        sensor.AddObservation(transform.localPosition);
+        sensor.AddObservation(transform.position);
 
         //Health
         sensor.AddObservation(health.charHealth);
 
         //Environment Observations (Could be incomplete)
-        for(int i = 0; i < instanceManager.bulletPoolMaxSize; ++i)
+        for(int i = 0; i < ShooterInstanceManager.instance.bulletPoolMaxSize; ++i)
         {
-            GameObject bullet = instanceManager.bulletPool.Get();
-            //Looping through the bullets, and seeing where they are and which direction they're going and what speed (reserve space for all potential used size of object pools)
-            if(bullet != null)
+            if(i < bulletParent.childCount)
             {
-                sensor.AddObservation(bullet.transform.position);
+                Transform bullet = bulletParent.GetChild(i);
 
-                if(bullet.TryGetComponent(out Bullet bulletScript))
+                //Looping through the bullets, and seeing where they are and which direction they're going and what speed (reserve space for all potential used size of object pools)
+                if(bullet != null && bullet.gameObject.activeSelf)
                 {
-                    Rigidbody rb = bulletScript.GetRB();
-                    if(rb != null)
+                    sensor.AddObservation(bullet.transform.position);
+
+                    if(bullet.TryGetComponent(out Bullet bulletScript))
                     {
-                        sensor.AddObservation(rb.velocity.normalized);
+                        Rigidbody rb = bulletScript.GetRB();
+                        if(rb != null)
+                        {
+                            sensor.AddObservation(rb.velocity.normalized);
+                        }
                     }
                 }
+            }
+            else
+            {
+                sensor.AddObservation(Vector3.zero);
+                sensor.AddObservation(Vector3.zero);
+            }
+        }
+
+        //Important Objects visible out of potential objects visible (including type), the number should be the same each time
+        for(int i = 0; i < 10; ++i)
+        {
+            if(i < senses.visibleTargets.Count)
+            {
+                //3
+                sensor.AddObservation(senses.visibleTargets[i].transform.position);
+                //1
+                sensor.AddObservation(senses.visibleTargets[i].gameObject.layer);
+                //Looping through the objects seen and adding the positions and what they are
+            }
+            else
+            {
+                sensor.AddObservation(Vector3.zero);
+                sensor.AddObservation(0);
+            }
+        }
+
+        for(int i = 0; i < 10; ++i)
+        {
+            if(i < senses.obstacles.Count)
+            {
+                //3
+                sensor.AddObservation((transform.position - senses.obstacles[i].transform.position).normalized);
+                //1
+                sensor.AddObservation(senses.obstacles[i].gameObject.layer);
+                //Looping through the objects seen and adding the positions and what they are
+            }
+            else
+            {
+                sensor.AddObservation(Vector3.zero);
+                sensor.AddObservation(0);
             }
         }
     }
 
     public override void WriteDiscreteActionMask(IDiscreteActionMask actionMask)
     {
-        if(characterPickup)
+        if(!characterPickup)
             return;
 
         bool hasWeapon = characterPickup.bEquipped;
 
         //The only actions blocked should be when the agent has no gun
+        //actionMask.SetActionEnabled(0, 6, hasWeapon);
         actionMask.SetActionEnabled(0, 7, hasWeapon);
-        actionMask.SetActionEnabled(0, 8, hasWeapon);
     }
 
     #endregion
@@ -219,7 +248,7 @@ public class MLShooter : Agent, IAgentable
         //Round Draw
         if(endState == (int)ShooterGameOutcome.Draw)
         {
-            AddReward(-5f);
+            AddReward(-1f);
         }
         //Round Win
         else if (endState == (int)ShooterGameOutcome.Win)
@@ -229,7 +258,7 @@ public class MLShooter : Agent, IAgentable
         //Round Lose
         else if(endState == (int)ShooterGameOutcome.Lose)
         {
-            AddReward(-25f);
+            AddReward(-10f);
         }
 
         EndEpisode();

@@ -47,13 +47,13 @@ public class CharacterPickupTrigger : MonoBehaviour
                     ThrowEquippable();
                 }
 
-                equippable.Pickup(handTransform, gameObject.layer, shooter);
+                equippable.Pickup(handTransform, shooter);
 
                 currentlyEquipped = equippable;
                 equipObj = equippable.transform;
                 bEquipped = true;
 
-                shooter.AddReward(1f);
+                shooter.AddReward(5f);
             }
         }
     }
@@ -62,6 +62,15 @@ public class CharacterPickupTrigger : MonoBehaviour
 
     #region Public Methods
 
+    public bool bCanShoot()
+    {
+        if(currentlyEquipped == null)
+        {
+            return false;
+        }
+
+        return currentlyEquipped.canShoot;
+    }
     public void UseEquippable()
     {
         if(currentlyEquipped == null)
@@ -85,7 +94,7 @@ public class CharacterPickupTrigger : MonoBehaviour
         equipObj = null;
         bEquipped = false;
 
-        shooter.AddReward(-3f);
+        //shooter.AddReward(-3f);
     }
 
     #endregion

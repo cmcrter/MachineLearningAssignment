@@ -1,24 +1,24 @@
 {
     "Shooter": {
-        "elo": 1199.5,
+        "elo": 799.0014391117091,
         "checkpoints": [
             {
-                "steps": 5215,
-                "file_path": "results\\Shooter\\Shooter\\Shooter-5215.onnx",
+                "steps": 6747,
+                "file_path": "results\\Shooter\\Shooter\\Shooter-6747.onnx",
                 "reward": null,
-                "creation_time": 1652367140.5356257,
+                "creation_time": 1652465180.2868066,
                 "auxillary_file_paths": [
-                    "results\\Shooter\\Shooter\\Shooter-5215.pt"
+                    "results\\Shooter\\Shooter\\Shooter-6747.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 5215,
+            "steps": 6747,
             "file_path": "results\\Shooter\\Shooter.onnx",
             "reward": null,
-            "creation_time": 1652367140.5356257,
+            "creation_time": 1652465180.2868066,
             "auxillary_file_paths": [
-                "results\\Shooter\\Shooter\\Shooter-5215.pt"
+                "results\\Shooter\\Shooter\\Shooter-6747.pt"
             ]
         }
     },
