@@ -10,6 +10,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class KartDemoUI : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class KartDemoUI : MonoBehaviour
     private List<int> bettingAmounts = new List<int>();
 
     [SerializeField]
+    private List<Color> colors = new List<Color>();
+
+    [SerializeField]
     private int StartingAmount = 500;
     private int CurrentAmount = 500;
 
@@ -35,6 +39,13 @@ public class KartDemoUI : MonoBehaviour
 
     [SerializeField]
     private List<TextMeshProUGUI> buttonBetTexts = new List<TextMeshProUGUI>();
+
+    [SerializeField]
+    private List<Image> mapEndOrderImages = new List<Image>();
+    [SerializeField]
+    private List<TextMeshProUGUI> mapEndBettingTexts = new List<TextMeshProUGUI>();
+    [SerializeField]
+    private TextMeshProUGUI endCurrencyText;
 
     #endregion
 
@@ -57,10 +68,8 @@ public class KartDemoUI : MonoBehaviour
     {
         for(int i = 0; i < indexes.Count; ++i)
         {
-
+            CurrentAmount += (bettingAmounts[indexes[i]] * (demoManager.drivers.Count - indexes[i]));
         }
-
-        ResetBets();
     }
 
     //Not keeping bets from a previous round
@@ -70,6 +79,8 @@ public class KartDemoUI : MonoBehaviour
         {
             bettingAmounts[i] = 0;
         }
+
+        UpdateBetTexts();
     }
 
     public void CloseBettingPanel()
@@ -79,6 +90,7 @@ public class KartDemoUI : MonoBehaviour
 
     public void OpenBettingPanel()
     {
+        ResetBets();
         currencyText.text = CurrentAmount.ToString();
 
         bettingPanel.SetActive(true);
@@ -91,6 +103,7 @@ public class KartDemoUI : MonoBehaviour
 
     public void OpenRaceEndPanel()
     {
+        UpdateMapEndOrder();
         raceEndPanel.SetActive(true);
     }
 
@@ -109,7 +122,7 @@ public class KartDemoUI : MonoBehaviour
 
     public void RemoveBettingAmount(int index)
     {
-        if(bettingAmounts[index] > 0 )
+        if(bettingAmounts[index] == 0)
         {
             return;
         }
@@ -131,6 +144,17 @@ public class KartDemoUI : MonoBehaviour
         for(int i = 0; i < buttonBetTexts.Count; ++i)
         {
             buttonBetTexts[i].text = bettingAmounts[i].ToString();
+        }
+    }
+
+    private void UpdateMapEndOrder()
+    {
+        endCurrencyText.text = CurrentAmount.ToString();
+
+        for(int i = 0; i < demoManager.carsWhoCrossedTheLine.Count; ++i)
+        {
+            mapEndBettingTexts[i].text = bettingAmounts[demoManager.carsWhoCrossedTheLine[i]].ToString();
+            mapEndOrderImages[i].color = colors[demoManager.carsWhoCrossedTheLine[i]];
         }
     }
 

@@ -40,7 +40,7 @@ public class KartDemoManager : MonoBehaviour
     [SerializeField]
     private float bettingDuration = 30f;
     [SerializeField]
-    private float raceDuration = 180f;
+    private float raceDuration = 900f;
 
     public List<int> carsWhoCrossedTheLine = new List<int>();
 
@@ -79,6 +79,11 @@ public class KartDemoManager : MonoBehaviour
             carsWhoCrossedTheLine.Add(driver.driverID);
             driver.enabled = false;
         }
+
+        if(carsWhoCrossedTheLine.Count == drivers.Count)
+        {
+            RaceEnded = true;
+        }
     }
 
     public void LockGame(bool locking)
@@ -94,6 +99,11 @@ public class KartDemoManager : MonoBehaviour
             bettingTimer.OverrideCurrentTime(-bettingTimer.current_time);
             bOverrideBetting = true;
         }
+    }
+
+    public void StartNextRound()
+    {
+        StartCoroutine(Co_GameLoop());
     }
 
     #endregion
@@ -117,8 +127,9 @@ public class KartDemoManager : MonoBehaviour
     private IEnumerator Co_BettingTimer()
     {
         bettingTimer = new Timer(bettingDuration);
+        UpdateTimerUI(timerText, bettingTimer);
 
-        while (bettingTimer.isActive && !bOverrideBetting)
+        while(bettingTimer.isActive && !bOverrideBetting)
         {
             bettingTimer.Tick(Time.deltaTime);
             UpdateTimerUI(timerText, bettingTimer);
@@ -131,11 +142,13 @@ public class KartDemoManager : MonoBehaviour
     private IEnumerator Co_RoundTimer()
     {
         raceTimer = new Timer(raceDuration);
+        UpdateTimerUI(timerText, raceTimer);
+
         RaceEnded = false;
 
         Time.timeScale = timeScale;
 
-        while(raceTimer.isActive || !RaceEnded)
+        while(raceTimer.isActive && !RaceEnded)
         {
             raceTimer.Tick(Time.deltaTime);
             UpdateTimerUI(timerText, raceTimer);
@@ -191,6 +204,12 @@ public class KartDemoManager : MonoBehaviour
 
     private void RaceEndScreen()
     {
+        //Shut down all cars
+        foreach(MLDriver driver in drivers)
+        {
+            driver.enabled = false;
+        }
+
         //Once either timer has run out or all vehicles have crossed the line
         UI.CarWon(carsWhoCrossedTheLine);
 
