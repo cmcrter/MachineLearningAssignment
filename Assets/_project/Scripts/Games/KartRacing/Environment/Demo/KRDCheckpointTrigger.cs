@@ -1,34 +1,30 @@
 ////////////////////////////////////////////////////////////
-// File: KRTCheckpointTrigger.cs
+// File: KRDCheckpointTrigger.cs
 // Author: Charles Carter
-// Date Created: 21/03/21
+// Date Created: 14/05/22
 // Last Edited By: Charles Carter
-// Date Last Edited: 21/03/21
-// Brief: The checkpoints' trigger to tell the instance manager when a car has entered it
+// Date Last Edited: 14/05/22
+// Brief: Making sure the AI follow the track fully
 //////////////////////////////////////////////////////////// 
 
 using UnityEngine;
 
-public class KRTCheckpointTrigger : MonoBehaviour
+public class KRDCheckpointTrigger : MonoBehaviour
 {
     #region Variables
 
     [SerializeField]
-    private KartTrainingManager manager;
+    private KartDemoManager manager;
     [SerializeField]
     private int checkpointID;
 
     #endregion
- 
+
     #region Unity Methods
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out PlayerDriver driver))
-        {
-            manager.DriverCrossedCheckpoint(driver, checkpointID);
-        }
-        else if(other.TryGetComponent(out MLDriver agent))
+        if(other.TryGetComponent(out MLDriver agent))
         {
             manager.DriverCrossedCheckpoint(agent, checkpointID);
         }

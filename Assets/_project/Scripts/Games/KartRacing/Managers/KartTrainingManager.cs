@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////
-// File: RaceManager.cs
+// File: KartTrainingManager.cs
 // Author: Charles Carter
 // Date Created: 21/03/22
 // Last Edited By: Charles Carter
@@ -11,14 +11,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RaceManager : MonoBehaviour
+public class KartTrainingManager : MonoBehaviour
 {
     #region Variables
 
     [SerializeField]
     private List<MLDriver> MLDrivers = new List<MLDriver>();
     [SerializeField]
-    private List<CheckpointTrigger> checkpoints = new List<CheckpointTrigger>();
+    private List<KRTCheckpointTrigger> checkpoints = new List<KRTCheckpointTrigger>();
 
     [SerializeField]
     private List<Transform> startingPoints = new List<Transform>();
@@ -30,7 +30,7 @@ public class RaceManager : MonoBehaviour
     private int lapReward = 150;
 
     [SerializeField]
-    private RaceUI UI;
+    private KRTRaceUI UI;
 
     private int finishedDrivers = 0;
 

@@ -10,7 +10,7 @@
 using TMPro;
 using UnityEngine;
 
-public class RaceUI : MonoBehaviour
+public class KRTRaceUI : MonoBehaviour
 {
     #region Variables
 

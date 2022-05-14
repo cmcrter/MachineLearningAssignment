@@ -9,12 +9,12 @@
 
 using UnityEngine;
 
-public class FinishLineTrigger : MonoBehaviour
+public class KRTFinishLineTrigger : MonoBehaviour
 {
     #region Variables
 
     [SerializeField]
-    private RaceManager manager;
+    private KartTrainingManager manager;
 
     #endregion
 
