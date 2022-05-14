@@ -3295,7 +3295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCirclesTurn: 0
   BoardUI: {fileID: 874213172}
-  mode: 1
+  mode: 2
   MLAgentX: {fileID: 1662097399}
   MLAgentO: {fileID: 714563701}
 --- !u!1 &1792841856

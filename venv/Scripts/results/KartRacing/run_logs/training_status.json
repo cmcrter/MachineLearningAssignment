@@ -2,58 +2,58 @@
     "Kart": {
         "checkpoints": [
             {
-                "steps": 2499994,
-                "file_path": "results\\KartRacing\\Kart\\Kart-2499994.onnx",
-                "reward": -125.4979920566082,
-                "creation_time": 1652185082.6330395,
+                "steps": 6499966,
+                "file_path": "results\\KartRacing\\Kart\\Kart-6499966.onnx",
+                "reward": -1.870727314190431,
+                "creation_time": 1652527495.1558049,
                 "auxillary_file_paths": [
-                    "results\\KartRacing\\Kart\\Kart-2499994.pt"
+                    "results\\KartRacing\\Kart\\Kart-6499966.pt"
                 ]
             },
             {
-                "steps": 2645090,
-                "file_path": "results\\KartRacing\\Kart\\Kart-2645090.onnx",
+                "steps": 6999990,
+                "file_path": "results\\KartRacing\\Kart\\Kart-6999990.onnx",
+                "reward": -9.998499275743962,
+                "creation_time": 1652527970.9058325,
+                "auxillary_file_paths": [
+                    "results\\KartRacing\\Kart\\Kart-6999990.pt"
+                ]
+            },
+            {
+                "steps": 7201134,
+                "file_path": "results\\KartRacing\\Kart\\Kart-7201134.onnx",
                 "reward": null,
-                "creation_time": 1652185226.909178,
+                "creation_time": 1652528178.8262577,
                 "auxillary_file_paths": [
-                    "results\\KartRacing\\Kart\\Kart-2645090.pt"
+                    "results\\KartRacing\\Kart\\Kart-7201134.pt"
                 ]
             },
             {
-                "steps": 2999936,
-                "file_path": "results\\KartRacing\\Kart\\Kart-2999936.onnx",
-                "reward": -1.499502021074295,
-                "creation_time": 1652185678.3484893,
-                "auxillary_file_paths": [
-                    "results\\KartRacing\\Kart\\Kart-2999936.pt"
-                ]
-            },
-            {
-                "steps": 3499964,
-                "file_path": "results\\KartRacing\\Kart\\Kart-3499964.onnx",
-                "reward": -131.99799250513314,
-                "creation_time": 1652186181.9368837,
-                "auxillary_file_paths": [
-                    "results\\KartRacing\\Kart\\Kart-3499964.pt"
-                ]
-            },
-            {
-                "steps": 3571640,
-                "file_path": "results\\KartRacing\\Kart\\Kart-3571640.onnx",
+                "steps": 7254034,
+                "file_path": "results\\KartRacing\\Kart\\Kart-7254034.onnx",
                 "reward": null,
-                "creation_time": 1652186253.9017248,
+                "creation_time": 1652528475.9730344,
                 "auxillary_file_paths": [
-                    "results\\KartRacing\\Kart\\Kart-3571640.pt"
+                    "results\\KartRacing\\Kart\\Kart-7254034.pt"
+                ]
+            },
+            {
+                "steps": 7261234,
+                "file_path": "results\\KartRacing\\Kart\\Kart-7261234.onnx",
+                "reward": -1.0000000707805157,
+                "creation_time": 1652528568.6010234,
+                "auxillary_file_paths": [
+                    "results\\KartRacing\\Kart\\Kart-7261234.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 3571640,
+            "steps": 7261234,
             "file_path": "results\\KartRacing\\Kart.onnx",
-            "reward": null,
-            "creation_time": 1652186253.9017248,
+            "reward": -1.0000000707805157,
+            "creation_time": 1652528568.6010234,
             "auxillary_file_paths": [
-                "results\\KartRacing\\Kart\\Kart-3571640.pt"
+                "results\\KartRacing\\Kart\\Kart-7261234.pt"
             ]
         }
     },

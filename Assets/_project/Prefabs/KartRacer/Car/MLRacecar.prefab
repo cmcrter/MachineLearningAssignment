@@ -460,6 +460,7 @@ MonoBehaviour:
   thisLayer:
     serializedVersion: 2
     m_Bits: 1152
+  collisionThisFrame: 0
 --- !u!114 &5525772528265029540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,7 +474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 19
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0

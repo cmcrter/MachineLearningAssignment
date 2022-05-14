@@ -27,8 +27,7 @@ public class MLFlappyAgent : Agent, IAgentable
     [SerializeField]
     private WorldMover manager;
 
-    [SerializeField]
-    private BirdMovement CharacterActions;
+    public BirdMovement CharacterActions;
 
     private bool tappedLastFrame = false;
     const float height = 8f;

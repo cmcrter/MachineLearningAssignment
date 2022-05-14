@@ -95,12 +95,7 @@ public class ShooterInstanceManager : MonoBehaviour
 
         foreach(MLShooter shooter in Agents)
         {
-            if(shooter == shootingAgent || !shootingAgent.senses.obstacles.Contains(shooter.transform))
-            {
-                continue;
-            }
-
-            if(shooter.gameObject.layer != shootingAgent.gameObject.layer)
+            if(shooter.gameObject.layer != shootingAgent.gameObject.layer && shootingAgent.senses.obstacles.Contains(shooter.transform))
             {
                 directions.Add((shooter.transform.position - shootingAgent.transform.position).normalized);
             }

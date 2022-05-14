@@ -17,6 +17,12 @@ public class WorldMover : MonoBehaviour
     #region Public Fields
 
     [Header("Necessary Variables")]
+
+    public bool DemoScene = false;
+    [SerializeField]
+    private GameObject gameEndUI;
+    [SerializeField]
+    private FlappyUI UI;
     [SerializeField]
     private Transform worldTransform;
 
@@ -78,11 +84,22 @@ public class WorldMover : MonoBehaviour
             worldTransform.GetChild(i).transform.position -= new Vector3(0, 0, movementSpeed * Time.deltaTime);
         }
 
-        //Stopping the AI from tapping so quickly, that it has a greater force than the collision detection
-        if(player.transform.localPosition.y > 8 || player.transform.localPosition.y < -8)
+        if(agent)
         {
-            agent.AddReward(-5f);
-            PlayerDied();
+            //Stopping the AI from tapping so quickly, that it has a greater force than the collision detection
+            if(agent.transform.localPosition.y > 8 || agent.transform.localPosition.y < -8)
+            {
+                agent.AddReward(-5f);
+                PlayerDied(agent.CharacterActions);
+            }
+        }
+
+        if(player)
+        {
+            if(player.transform.localPosition.y > 8 || player.transform.localPosition.y < -8)
+            {
+                PlayerDied(player);
+            }
         }
     }
 
@@ -149,23 +166,40 @@ public class WorldMover : MonoBehaviour
         PipeSetPool.Get();
     }
 
-    public void PlayerDied()
+    public void PlayerDied(BirdMovement movement)
     {        
         if(Debug.isDebugBuild)
         {
            // Debug.Log("Player Died");
         }
 
-        if(agent)
+        FlappyGameResult result;
+
+         if(movement == agent.CharacterActions)
         {
+            result = FlappyGameResult.PlayerWon;
+
             if(agent.enabled)
             {
                 agent.AddReward(-1f);
                 agent.EndEpisode();
+                agent.enabled = false;
             }
         }
+        else
+        {
+            result = FlappyGameResult.PlayerLost;
+        }
 
-        GameComplete();
+        if(UI && gameEndUI && DemoScene && gameActive)
+        {
+            UI.GameOverUISetValues(currentScore, result);
+        }
+
+        if(gameActive)
+        {
+            GameComplete();
+        }
     }
 
     public void GameComplete()
@@ -182,7 +216,14 @@ public class WorldMover : MonoBehaviour
             Destroy(worldTransform.GetChild(i).gameObject);       
         }
 
-        StartCoroutine(Co_GameOver());
+        if(DemoScene && gameEndUI != null)
+        {
+            gameEndUI.SetActive(true);
+        }
+        else
+        {
+            StartCoroutine(Co_GameOver());
+        }
     }
 
     public void AddScore()
@@ -219,6 +260,21 @@ public class WorldMover : MonoBehaviour
         return leftChild;
     }
 
+    public void GameOver()
+    {
+        ResetWorld();
+
+        if(agent)
+        {
+            agent.CharacterActions.ResetPlayer();
+        }
+
+        if(player)
+        {
+            player.ResetPlayer();
+        }
+    }
+
     #endregion
 
     #region Private Methods
@@ -226,9 +282,9 @@ public class WorldMover : MonoBehaviour
     private IEnumerator Co_GameOver()
     {
         yield return new WaitForSeconds(1.0f);
-        ResetWorld();
-        player.ResetPlayer();
+        GameOver();
     }
+
 
     private void ResetWorld()
     {
@@ -243,10 +299,8 @@ public class WorldMover : MonoBehaviour
 
         if(agent)
         {
-            if(agent.enabled)
-            {
-                agent.OnEpisodeBegin();
-            }
+            agent.enabled = true;
+            agent.OnEpisodeBegin();
         }
 
         gameActive = true;

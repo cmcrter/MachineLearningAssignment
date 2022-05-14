@@ -15,6 +15,8 @@ public class BirdMovement : MonoBehaviour
 
     [SerializeField]
     private WorldMover manager;
+    [SerializeField]
+    private FlappyUI UI;
 
     [SerializeField]
     private Rigidbody rb;
@@ -71,25 +73,33 @@ public class BirdMovement : MonoBehaviour
         if(!bPlayerControlled)
             return;
 
+        //Simple tap control
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Tap();
         }
 
+        //Reset button (can currently be abused)
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             //Call this instead of player died so there's no punishment
             manager.GameComplete();
         }
+
+        //Pause Menu Control
+        if(Input.GetKeyDown(KeyCode.P) && UI)
+        {
+            UI.TogglePause();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.gameObject.layer != 7)
+        if(collision.collider.gameObject.layer != gameObject.layer)
         {
             //Player Died
             rb.isKinematic = true;
-            manager.PlayerDied();
+              manager.PlayerDied(this);
         }
     }
 

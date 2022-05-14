@@ -1124,7 +1124,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 5022602860645237092, guid: f9a84703377799e4a8c7d0338e6727ef, type: 3}
   m_InferenceDevice: 3
-  m_BehaviorType: 0
+  m_BehaviorType: 1
   m_BehaviorName: WinTicTacToe
   TeamId: 2
   m_UseChildSensors: 1
@@ -2907,7 +2907,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1662097400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2925,7 +2925,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5
   gameState: {fileID: 1738340502}
-  isMyTurn: 0
+  isMyTurn: 1
 --- !u!114 &1662097401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2950,7 +2950,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 5022602860645237092, guid: f9a84703377799e4a8c7d0338e6727ef, type: 3}
   m_InferenceDevice: 3
-  m_BehaviorType: 0
+  m_BehaviorType: 2
   m_BehaviorName: WinTicTacToe
   TeamId: 1
   m_UseChildSensors: 1
@@ -3295,7 +3295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCirclesTurn: 0
   BoardUI: {fileID: 874213172}
-  mode: 2
+  mode: 1
   MLAgentX: {fileID: 1662097399}
   MLAgentO: {fileID: 714563701}
 --- !u!1 &1792841856

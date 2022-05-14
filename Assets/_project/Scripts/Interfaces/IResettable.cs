@@ -1,31 +1,15 @@
 ////////////////////////////////////////////////////////////
-// File: 
-// Author: 
-// Date Created: 
-// Last Edited By:
-// Date Last Edited:
-// Brief: 
+// File: IResettable.cs
+// Author: Charles Carter
+// Date Created: 14/05/22
+// Last Edited By: Charles Carter
+// Date Last Edited: 14/05/22
+// Brief: An interface for anything that needs to be reset
 //////////////////////////////////////////////////////////// 
 
 using UnityEngine;
 
-public class IResettable : MonoBehaviour
+public interface IResettable
 {
-    #region Public Fields
-    #endregion
- 
-    #region Unity Methods
-    void Start()
-    {
-	
-    }
- 
-    void Update()
-    {
-	
-    }
-    #endregion
- 
-    #region Private Methods
-    #endregion
+    void ResetObject();
 }

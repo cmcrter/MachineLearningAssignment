@@ -62,6 +62,10 @@ public class MLShooter : Agent, IAgentable
 
     public override void OnEpisodeBegin()
     {
+        transform.position = new Vector3(transform.position.x, 1, Random.Range(-13, 13));
+        float yRot = Random.Range(0, 360);
+        transform.rotation = transform.rotation * Quaternion.AngleAxis(yRot, Vector3.up);
+
         base.OnEpisodeBegin();
     }
 
@@ -109,11 +113,7 @@ public class MLShooter : Agent, IAgentable
                 // 3 - Equip (Action type)
                 // 3.1 - Shoot (Action)
                 characterActions.Shoot();
-
-                if(characterPickup.bCanShoot())
-                {
-                    AddReward(instanceManager.GetDirBetweenAgents(this) * 2f);
-                }
+                AddReward(instanceManager.GetDirBetweenAgents(this) * 0.1f);
                 break;
             //case 8:
             //    // 3.2 - Drop (Action)

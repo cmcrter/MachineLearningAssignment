@@ -23,9 +23,10 @@ public class PipeTrigger : MonoBehaviour
     {
         if(other.gameObject.layer == 9)
         {
-            if(manager)
+            if(manager && enabled)
             {
                 manager.AddScore();
+                enabled = false;
             }
         }
     }
