@@ -81,7 +81,7 @@ public class LoadingScreen : MonoBehaviour
             case TypeOfScene.KartRacing:
                 ShowSceneInfo(2);
                 break;
-            case TypeOfScene.Hummingbird:
+            case TypeOfScene.Spaceship:
                 ShowSceneInfo(3);
                 break;
             case TypeOfScene.Shooter:

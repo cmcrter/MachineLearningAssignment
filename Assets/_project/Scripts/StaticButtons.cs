@@ -39,8 +39,8 @@ public class StaticButtons : MonoBehaviour
 
     public void LoadHummingbirdScene()
     {
-        LoadingInformation.SceneToLoad = "HummingbirdDemo";
-        LoadingInformation.scene = TypeOfScene.Hummingbird;
+        LoadingInformation.SceneToLoad = "SpaceshipDemo";
+        LoadingInformation.scene = TypeOfScene.Spaceship;
         SceneManager.LoadScene("LoadingScene");
     }
 

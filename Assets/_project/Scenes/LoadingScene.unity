@@ -722,8 +722,8 @@ MonoBehaviour:
   - Title: Kart Racing
     Description: Place amounts on which car you think will win!
     SceneSprite: {fileID: 0}
-  - Title: Hummingbird
-    Description: 
+  - Title: Spaceship
+    Description: A race to collect information againt an opponent craft!
     SceneSprite: {fileID: 0}
   - Title: Shooter
     Description: 

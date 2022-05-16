@@ -14,7 +14,7 @@ using UnityEngine.Pool;
 
 public class WorldMover : MonoBehaviour
 {
-    #region Public Fields
+    #region Variables
 
     [Header("Necessary Variables")]
 
@@ -48,6 +48,9 @@ public class WorldMover : MonoBehaviour
     private float startingPipes = 3f;
     private int pipePoolMaxSize = 10;
 
+    //This is in local space to the starting position
+    [SerializeField]
+    private float maximumY = 8;
     [SerializeField]
     private float randomHeightVariance = 4;
 
@@ -79,6 +82,8 @@ public class WorldMover : MonoBehaviour
         if(!gameActive)
             return;
 
+        RenderSettings.skybox.SetFloat("_Rotation", Time.time * 0.5f);
+
         for(int i = 0; i < worldTransform.childCount; ++i)
         {
             worldTransform.GetChild(i).transform.position -= new Vector3(0, 0, movementSpeed * Time.deltaTime);
@@ -87,7 +92,7 @@ public class WorldMover : MonoBehaviour
         if(agent)
         {
             //Stopping the AI from tapping so quickly, that it has a greater force than the collision detection
-            if(agent.transform.localPosition.y > 8 || agent.transform.localPosition.y < -8)
+            if(agent.transform.localPosition.y > maximumY || agent.transform.localPosition.y < -maximumY)
             {
                 agent.AddReward(-5f);
                 PlayerDied(agent.CharacterActions);
@@ -96,7 +101,7 @@ public class WorldMover : MonoBehaviour
 
         if(player)
         {
-            if(player.transform.localPosition.y > 8 || player.transform.localPosition.y < -8)
+            if(player.transform.localPosition.y > maximumY || player.transform.localPosition.y < -maximumY)
             {
                 PlayerDied(player);
             }

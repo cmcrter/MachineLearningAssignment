@@ -13,7 +13,7 @@ public enum TypeOfScene
     TicTacToe,
     FlappyShip,
     KartRacing,
-    Hummingbird,
+    Spaceship,
     Shooter,
     UNKNOWN,
     COUNT

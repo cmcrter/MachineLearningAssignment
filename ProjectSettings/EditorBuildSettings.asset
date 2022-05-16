@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/_project/Scenes/Demonstration/FlappyShipDemo.unity
     guid: db7e8ab341dd43347b610ed8d81135a8
   - enabled: 1
-    path: Assets/_project/Scenes/Demonstration/HummingbirdDemo.unity
+    path: Assets/_project/Scenes/Demonstration/SpaceshipDemo.unity
     guid: 892502fc05a30464ebc90901e1755240
   - enabled: 1
     path: Assets/_project/Scenes/Demonstration/KartRacingDemo.unity
