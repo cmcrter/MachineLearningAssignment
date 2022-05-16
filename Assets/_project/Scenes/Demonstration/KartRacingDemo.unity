@@ -20050,6 +20050,7 @@ GameObject:
   - component: {fileID: 1222615671}
   - component: {fileID: 1222615670}
   - component: {fileID: 1222615674}
+  - component: {fileID: 1222615675}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -20183,6 +20184,18 @@ MonoBehaviour:
   - {fileID: 468485514}
   - {fileID: 1925865317}
   endCurrencyText: {fileID: 592939999}
+--- !u!114 &1222615675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222615669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5f3add21a76384d86e0d6dbcf32805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1233654725
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28754,7 +28767,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.776886, y: 1}
+    m_SensorSize: {x: 1.7773019, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

@@ -39,19 +39,13 @@ namespace ML.TTT
 
         #endregion
 
-        #region Unity Methods
-
-        private void Awake()
-        {
-
-        }
-
-        #endregion
-
         #region Public Methods
 
+        //Placing a tile
         public void Place(Tile_State newTileState, int index)
         {
+            //Could be cleaned up by showing a sprite instead of this, but since it's a small game the optimization is not necessary
+
             if(newTileState.Equals(Tile_State.O) && CirclePrefab != null)
             {
                 Instantiate(CirclePrefab, TileParents[index]);
@@ -125,6 +119,21 @@ namespace ML.TTT
             }
         }
 
+        //Only making buttons interactable if the slot is not filled already
+        public void EnableFreeBoardUI(TTTBoard thisBoard)
+        {
+            for(int i = 0; i < TileButtons.Count; ++i)
+            {
+                Vector2 boardPos = TTTBoard.ConvertIndexTo2DPoint(i);
+
+                if(thisBoard.boardIndexes[(int)boardPos.x, (int)boardPos.y] == 0)
+                {
+                    TileButtons[i].interactable = true;
+                }
+            }
+        }
+
+        //Updating the win text when there's a win
         public void AddWin(Tile_State state, int winCount)
         {
             if(winTexts[(int)state] == null)
@@ -135,9 +144,6 @@ namespace ML.TTT
             winTexts[(int)state].text = winCount.ToString();
         }
 
-        #endregion
-
-        #region Private Methods
         #endregion
     }
 }

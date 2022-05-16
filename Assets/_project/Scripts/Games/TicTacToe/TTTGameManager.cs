@@ -34,15 +34,15 @@ namespace ML.TTT
         private TTTBoardInteraction BoardUI;
 
         [SerializeField]
-        GAMEMODE mode = GAMEMODE.PvP;
+        private GAMEMODE mode = GAMEMODE.PvP;
 
         [SerializeField]
-        GameObject MLAgentX;
-        iAgent agentScriptX;
+        private GameObject MLAgentX;
+        private iAgent agentScriptX;
 
         [SerializeField]
-        GameObject MLAgentO;
-        iAgent agentScriptO;
+        private GameObject MLAgentO;
+        private iAgent agentScriptO;
 
         private int[] WinScores = new int[3];
 
@@ -55,12 +55,13 @@ namespace ML.TTT
             BoardUI = BoardUI ?? FindObjectOfType<TTTBoardInteraction>();
             BoardValues = new TTTBoard();
 
+            //Getting the agents
             if(MLAgentX)
             {
                 if(MLAgentX.TryGetComponent<iAgent>(out var AgentComp))
                 {
                     agentScriptX = AgentComp;
-                    agentScriptX.SetTeam(Tile_State.O);
+                    agentScriptX.SetTeam(Tile_State.X);
                 }
             }
 
@@ -115,8 +116,10 @@ namespace ML.TTT
                 return;
             }
 
+            //Flipping the turn bool
             isCirclesTurn = !isCirclesTurn;
 
+            //Prompting the AI
             if(MLAgentO.activeSelf)
             {
                 agentScriptO.SetTurn(isCirclesTurn);
@@ -125,6 +128,16 @@ namespace ML.TTT
             if(MLAgentX.activeSelf)
             {
                 agentScriptX.SetTurn(!isCirclesTurn);
+            }
+
+            //Enabling/Disabling the buttons if there's a player
+            if(!isCirclesTurn && mode == GAMEMODE.PvAI)
+            {
+                BoardUI.EnableFreeBoardUI(BoardValues);
+            }
+            else if (isCirclesTurn && mode == GAMEMODE.PvAI)
+            {
+                BoardUI.DisableBoardUI();
             }
         }
 
@@ -150,6 +163,7 @@ namespace ML.TTT
             return true;
         }
 
+        //Checking how many moves are left, if there's only 1, the AI doesn't need to calculate
         public (bool, int) OneMoveLeft()
         {
             int spaceLeft = 0;
@@ -180,6 +194,7 @@ namespace ML.TTT
             int XAmount = 0;
             int OAmount = 0;
 
+            //Counting the amount of claimed squares
             for(int i = 0; i < 3; ++i)
             {
                 for(int j = 0; j < 3; ++j)
@@ -195,6 +210,7 @@ namespace ML.TTT
                 }
             }
 
+            //Giving the AI some reward if they drew based on the amount of claimed squares
             if(team == Tile_State.O)
             {
                 if(OAmount > XAmount)
@@ -233,8 +249,11 @@ namespace ML.TTT
             switch(mode)
             {
                 case GAMEMODE.PvAI:
+                    //Player starts always
                     MLAgentO.SetActive(true);
                     agentScriptO.SetTurn(false);
+
+                    BoardUI.EnableBoardUI();
                     break;
                 case GAMEMODE.AIvAI:
                     MLAgentO.SetActive(true);
