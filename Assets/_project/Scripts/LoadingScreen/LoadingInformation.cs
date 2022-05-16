@@ -19,6 +19,7 @@ public enum TypeOfScene
     COUNT
 }
 
+//A static class which holds variables across scenes, incredibly useful for loading screen editing
 public static class LoadingInformation
 {
     public static string SceneToLoad;

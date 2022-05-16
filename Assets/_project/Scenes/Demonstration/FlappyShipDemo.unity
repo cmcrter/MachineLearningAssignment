@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.19634691, g: 0.09731356, b: 0.119633995, a: 1}
+  m_IndirectSpecularColor: {r: 0.18309778, g: 0.08924725, b: 0.110692225, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2343,7 +2343,7 @@ TextMesh:
   m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 20
-  m_FontStyle: 0
+  m_FontStyle: 1
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: 5e9becb1cdc6cec46b3dda62c267751c, type: 3}
   m_Color:
@@ -2357,7 +2357,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4320990808740344276}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.8, z: -32.5}
+  m_LocalPosition: {x: 0, y: 0, z: -38.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4320990808872517397}
@@ -2790,6 +2790,7 @@ MonoBehaviour:
   movementSpeed: 3
   pipeDistance: 9
   startingPipes: 7
+  maximumY: 8
   randomHeightVariance: 4
   currentScore: 0
   scoreText: {fileID: 4320990808740344278}
