@@ -39,6 +39,11 @@ public class PipeSet : MonoBehaviour
 
     #region Public Methods
 
+    public void TurnOnPipe()
+    {
+        pipeTrigger.enabled = true;
+    }
+
     public void Initialise(WorldMover newManager)
     {
         pipeTrigger.manager = newManager;

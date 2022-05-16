@@ -137,6 +137,7 @@ public class WorldMover : MonoBehaviour
     // Called when an item is taken from the pool using Get
     private void OnTakeFromPool(PipeSet go)
     {
+        go.TurnOnPipe();
         go.gameObject.SetActive(true);
         go.Initialise(this);
 

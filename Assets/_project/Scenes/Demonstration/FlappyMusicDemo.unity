@@ -205,7 +205,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 32264705}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1222615675}
+        m_TargetAssemblyTypeName: StaticButtons, Assembly-CSharp
+        m_MethodName: MainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &32264705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -913,7 +925,10 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8fa3926494a765c46a4a67cb754e2bd8, type: 2}
+  - {fileID: -8896051167825165466, guid: bdaf757de236ddc45927bc33821a9128, type: 3}
+  - {fileID: 2100000, guid: dd9ab3dc0e55e1448af8fe37ba83e279, type: 2}
+  - {fileID: -4660651839558579860, guid: bdaf757de236ddc45927bc33821a9128, type: 3}
+  - {fileID: -6867524174320841699, guid: bdaf757de236ddc45927bc33821a9128, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -942,7 +957,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764423933}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -1682360018315694226, guid: bdaf757de236ddc45927bc33821a9128, type: 3}
 --- !u!1 &933797519
 GameObject:
   m_ObjectHideFlags: 0
@@ -1210,8 +1225,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Intensity: 5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1310,8 +1325,8 @@ Camera:
   m_GameObject: {fileID: 1053790864}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 3
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1580,6 +1595,7 @@ GameObject:
   - component: {fileID: 1222615671}
   - component: {fileID: 1222615670}
   - component: {fileID: 1222615674}
+  - component: {fileID: 1222615675}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1686,6 +1702,18 @@ MonoBehaviour:
   pauseUI: {fileID: 1635725793}
   scoreText: {fileID: 1381933489}
   resultText: {fileID: 1910290555}
+--- !u!114 &1222615675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222615669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5f3add21a76384d86e0d6dbcf32805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1381933487
 GameObject:
   m_ObjectHideFlags: 0
@@ -2849,7 +2877,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4320990808045296297}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -2422165522289261425, guid: b1069cfb31dda314dab73ffb87e60edf, type: 3}
 --- !u!114 &4320990808045296295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2926,7 +2954,10 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: -8896051167825165466, guid: b1069cfb31dda314dab73ffb87e60edf, type: 3}
+  - {fileID: 6231023347082624160, guid: b1069cfb31dda314dab73ffb87e60edf, type: 3}
+  - {fileID: -6867524174320841699, guid: b1069cfb31dda314dab73ffb87e60edf, type: 3}
+  - {fileID: -4660651839558579860, guid: b1069cfb31dda314dab73ffb87e60edf, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3183,7 +3214,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9b795708ac8db8f4e8087f992f670550, type: 2}
+  - {fileID: -6867524174320841699, guid: 24e6f1b83a58f56428bbab937249ee3d, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
