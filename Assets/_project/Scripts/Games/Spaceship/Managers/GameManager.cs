@@ -78,10 +78,6 @@ public class GameManager : MonoBehaviour
     /// <returns>IEnumerator</returns>
     private void StartGame()
     {
-        // Update the UI (hide it)
-        uiController.ShowBanner("");
-        uiController.HideButton();
-
         // Start the game timer
         gameTimer = new Timer(gameDuration);
 

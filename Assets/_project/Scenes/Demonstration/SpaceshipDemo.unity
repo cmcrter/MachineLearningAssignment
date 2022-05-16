@@ -1043,9 +1043,6 @@ MonoBehaviour:
   playerInformationBar: {fileID: 1408573762}
   opponentInformationBar: {fileID: 2056068922}
   timerText: {fileID: 509525679}
-  bannerText: {fileID: 0}
-  button: {fileID: 0}
-  buttonText: {fileID: 0}
 --- !u!1 &1265472755
 GameObject:
   m_ObjectHideFlags: 0
@@ -1670,7 +1667,8 @@ GameObject:
   - component: {fileID: 1807059135}
   - component: {fileID: 1807059134}
   - component: {fileID: 1807059136}
-  m_Layer: 11
+  - component: {fileID: 1807059138}
+  m_Layer: 0
   m_Name: ComputerArea
   m_TagString: Boundary
   m_Icon: {fileID: 0}
@@ -1772,6 +1770,20 @@ MonoBehaviour:
   RandomComputers: 50
   colliderToPutRandComputers: {fileID: 1807059136}
   computerPrefab: {fileID: 6889661877992389414, guid: 8c1ba56fb43119a47b8fe36056e3a594, type: 3}
+--- !u!64 &1807059138
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807059132}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3238476783051683519, guid: 45781a58e01370c468932c5dd260d861, type: 3}
 --- !u!1001 &1910854214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2022,6 +2034,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2006291957}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!20 &2034086576 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4648646974609358097, guid: e686efe6d5e6b3f428b10b3c1c810a78, type: 3}
+  m_PrefabInstance: {fileID: 4648646974981609103}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2056068920
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,8 +2227,8 @@ MonoBehaviour:
   uiController: {fileID: 1222615674}
   player: {fileID: 1794214153}
   opponent: {fileID: 897875210}
-  computersArea: {fileID: 0}
-  mainCamera: {fileID: 0}
+  computersArea: {fileID: 1807059137}
+  mainCamera: {fileID: 2034086576}
 --- !u!1 &2125254933
 GameObject:
   m_ObjectHideFlags: 0
@@ -2353,10 +2370,6 @@ PrefabInstance:
       propertyPath: computersArea
       value: 
       objectReference: {fileID: 1807059137}
-    - target: {fileID: 4321165109431819601, guid: 6d19593c8c54d7043b69bc9725c3e957, type: 3}
-      propertyPath: computersLayer.m_Bits
-      value: 2176
-      objectReference: {fileID: 0}
     - target: {fileID: 4321165109431819613, guid: 6d19593c8c54d7043b69bc9725c3e957, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2414,6 +2427,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 564748317}
     m_Modifications:
+    - target: {fileID: 4648646974328315781, guid: e686efe6d5e6b3f428b10b3c1c810a78, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4648646974328315782, guid: e686efe6d5e6b3f428b10b3c1c810a78, type: 3}
       propertyPath: computersArea
       value: 
@@ -2466,8 +2483,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerShip
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4648646974328315780, guid: e686efe6d5e6b3f428b10b3c1c810a78, type: 3}
+    - target: {fileID: 4648646974328315786, guid: e686efe6d5e6b3f428b10b3c1c810a78, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e686efe6d5e6b3f428b10b3c1c810a78, type: 3}
 --- !u!1001 &6889661877663880894
 PrefabInstance:

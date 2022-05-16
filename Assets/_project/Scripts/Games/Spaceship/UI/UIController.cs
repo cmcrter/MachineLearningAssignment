@@ -16,15 +16,6 @@ public class UIController : MonoBehaviour
     [Tooltip("The timer text")]
     public TextMeshProUGUI timerText;
 
-    [Tooltip("The banner text")]
-    public TextMeshProUGUI bannerText;
-
-    [Tooltip("The button")]
-    public Button button;
-
-    [Tooltip("The button text")]
-    public TextMeshProUGUI buttonText;
-
     /// <summary>
     /// Delegate for a button click
     /// </summary>
@@ -41,42 +32,6 @@ public class UIController : MonoBehaviour
     public void ButtonClicked()
     {
         if (OnButtonClicked != null) OnButtonClicked();
-    }
-
-    /// <summary>
-    /// Shows the button
-    /// </summary>
-    /// <param name="text">The text string on the button</param>
-    public void ShowButton(string text)
-    {
-        buttonText.text = text;
-        button.gameObject.SetActive(true);
-    }
-
-    /// <summary>
-    /// Hides the button
-    /// </summary>
-    public void HideButton()
-    {
-        button.gameObject.SetActive(false);
-    }
-
-    /// <summary>
-    /// Shows banner text
-    /// </summary>
-    /// <param name="text">The text string to show</param>
-    public void ShowBanner(string text)
-    {
-        bannerText.text = text;
-        bannerText.gameObject.SetActive(true);
-    }
-
-    /// <summary>
-    /// Hides the banner text
-    /// </summary>
-    public void HideBanner()
-    {
-        bannerText.gameObject.SetActive(false);
     }
 
     /// <summary>

@@ -214,7 +214,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 1439f85f865285a4e9abecef797c232b, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 3
   m_BehaviorType: 0
   m_BehaviorName: HummingBird
@@ -243,12 +243,12 @@ MonoBehaviour:
   yawSpeed: 100
   beakTip: {fileID: 4321165108805176244}
   agentCamera: {fileID: 0}
-  trainingMode: 0
+  trainingMode: 1
   rb: {fileID: 4321165109431819607}
   computersArea: {fileID: 0}
   computersLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 2176
 --- !u!114 &4321165109431819606
 MonoBehaviour:
   m_ObjectHideFlags: 0

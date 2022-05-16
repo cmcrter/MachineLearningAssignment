@@ -319,8 +319,8 @@ public class SpaceshipAgent : Agent
         Debug.Assert(safePositionFound, "Could not find a safe position to spawn");
 
         //Keep the position and rotation as the scene values
-        //transform.position = potentialPosition;
-       // transform.rotation = potentialRotation;
+        transform.position = new Vector3(0, 18f, 0);
+        transform.rotation = Quaternion.identity;
     }
 
     /// <summary>
