@@ -69,7 +69,7 @@ public class SpaceshipAgent : Agent
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
-        computersArea = computersArea ?? GetComponentInParent<ComputerArea>();
+        computersArea = computersArea ?? FindObjectOfType<ComputerArea>();
 
         // If not training mode, no max step, play forever
         if (!trainingMode) MaxStep = 0;
@@ -80,7 +80,7 @@ public class SpaceshipAgent : Agent
     /// </summary>
     public override void OnEpisodeBegin()
     {
-        if (trainingMode)
+        if (trainingMode && computersArea)
         {
             // Only reset Computers in training when there is one agent per area
             computersArea.ResetComputers();

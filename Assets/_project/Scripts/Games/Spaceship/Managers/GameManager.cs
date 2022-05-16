@@ -27,8 +27,8 @@ public class GameManager : MonoBehaviour
     [Tooltip("The main camera for the scene")]
     public Camera mainCamera;
 
-    // When the game timer started
-    private float gameTimerStartTime;
+    private Timer gameTimer;
+    private float gameDuration = 90f;
 
     /// <summary>
     /// Gets the time remaining in the game
@@ -37,8 +37,7 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            float timeRemaining = timerAmount - (Time.time - gameTimerStartTime);
-            return Mathf.Max(0f, timeRemaining);
+            return gameTimer.current_time;
         }
     }
 
@@ -48,6 +47,11 @@ public class GameManager : MonoBehaviour
     public void ButtonClicked()
     {
         StartGame();
+    }
+
+    private void Awake()
+    {
+        gameTimer = new Timer(gameDuration);
     }
 
     /// <summary>
@@ -78,12 +82,8 @@ public class GameManager : MonoBehaviour
         uiController.ShowBanner("");
         uiController.HideButton();
 
-        // Use the player camera, disable the main camera
-        mainCamera.gameObject.SetActive(false);
-        player.agentCamera.gameObject.SetActive(true);
-
         // Start the game timer
-        gameTimerStartTime = Time.time;
+        gameTimer = new Timer(gameDuration);
 
         // Reset the Computers
         computersArea.ResetComputers();
@@ -117,6 +117,8 @@ public class GameManager : MonoBehaviour
         {
             EndGame();
         }
+
+        gameTimer.Tick(Time.deltaTime);
 
         // Update the timer and Information progress bars
         uiController.SetTimer(TimeRemaining);

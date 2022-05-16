@@ -30,6 +30,9 @@ public class ComputerArea : MonoBehaviour
     [SerializeField]
     private BoxCollider colliderToPutRandComputers;
 
+    [SerializeField]
+    private GameObject computerPrefab;
+
     /// <summary>
     /// Reset the Computers and computers plants
     /// </summary>
@@ -70,6 +73,8 @@ public class ComputerArea : MonoBehaviour
         computersPlants = new List<GameObject>();
         InformationcomputersDictionary = new Dictionary<Collider, Computer>();
         Computers = new List<Computer>();
+
+        PlacingRandomComputers();
     }
 
     /// <summary>
@@ -113,6 +118,10 @@ public class ComputerArea : MonoBehaviour
     {
         for(int i = 0; i < RandomComputers; ++i)
         {
+            float randX = Random.Range(colliderToPutRandComputers.bounds.min.x, colliderToPutRandComputers.bounds.max.x);
+            float randZ = Random.Range(colliderToPutRandComputers.bounds.min.z, colliderToPutRandComputers.bounds.max.z);
+
+            Instantiate(computerPrefab, new Vector3(randX, colliderToPutRandComputers.bounds.min.y, randZ), Quaternion.identity, transform);
         }
     }
 }

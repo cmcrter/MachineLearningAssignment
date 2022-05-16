@@ -19,7 +19,7 @@ public class Computer : MonoBehaviour
     /// </summary>
     public Collider InformationCollider;
 
-    // The solid collider representing the computers petals
+    // The solid collider representing the computers
     public Collider computersCollider;
 
     // The computers's material

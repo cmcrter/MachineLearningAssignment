@@ -16,6 +16,11 @@ public class StaticButtons : MonoBehaviour
     {
         Application.Quit();
     }
+    
+    /// <summary>
+    /// Loading a scene using the loading screen in the most efficient way possible
+    /// </summary>
+    /// <param name="sceneName"></param>
 
     public static void LoadScene(string sceneName)
     {
@@ -23,6 +28,9 @@ public class StaticButtons : MonoBehaviour
         SceneManager.LoadScene("LoadingScene");
     }
 
+    /// <summary>
+    /// Loading a specific scene when the scene type is important
+    /// </summary>
     public static void LoadTTTScene()
     {
         LoadingInformation.SceneToLoad = "TicTacToeDemo";
