@@ -73,19 +73,19 @@ public class LoadingScreen : MonoBehaviour
         switch(LoadingInformation.scene)
         {
             case TypeOfScene.TicTacToe:
-                ShowSceneInfo(1);
+                ShowSceneInfo(0);
                 break;
             case TypeOfScene.FlappyMusic:
-                ShowSceneInfo(2);
+                ShowSceneInfo(1);
                 break;
             case TypeOfScene.KartRacing:
-                ShowSceneInfo(3);
+                ShowSceneInfo(2);
                 break;
             case TypeOfScene.Hummingbird:
-                ShowSceneInfo(4);
+                ShowSceneInfo(3);
                 break;
             case TypeOfScene.Shooter:
-                ShowSceneInfo(5);
+                ShowSceneInfo(4);
                 break;
             //Intentional fall through
             case TypeOfScene.MainMenu:

@@ -23,9 +23,45 @@ public class StaticButtons : MonoBehaviour
         SceneManager.LoadScene("LoadingScene");
     }
 
+    public static void LoadTTTScene()
+    {
+        LoadingInformation.SceneToLoad = "TicTacToeDemo";
+        LoadingInformation.scene = TypeOfScene.TicTacToe;
+        SceneManager.LoadScene("LoadingScene");
+    }
+
+    public static void LoadFlappyMusicScene()
+    {
+        LoadingInformation.SceneToLoad = "FlappyMusicDemo";
+        LoadingInformation.scene = TypeOfScene.FlappyMusic;
+        SceneManager.LoadScene("LoadingScene");
+    }
+
+    public void LoadHummingbirdScene()
+    {
+        LoadingInformation.SceneToLoad = "HummingbirdDemo";
+        LoadingInformation.scene = TypeOfScene.Hummingbird;
+        SceneManager.LoadScene("LoadingScene");
+    }
+
+    public void LoadKartRacingScene()
+    {
+        LoadingInformation.SceneToLoad = "KartRacingDemo";
+        LoadingInformation.scene = TypeOfScene.KartRacing;
+        SceneManager.LoadScene("LoadingScene");
+    }
+
+    public void LoadShooterScene()
+    {
+        LoadingInformation.SceneToLoad = "ShooterDemo";
+        LoadingInformation.scene = TypeOfScene.Shooter;
+        SceneManager.LoadScene("LoadingScene");
+    }
+
     public static void MainMenu()
     {
         LoadingInformation.SceneToLoad = "MainMenu";
+        LoadingInformation.scene = TypeOfScene.MainMenu;
         SceneManager.LoadScene("LoadingScene");
     }
 }

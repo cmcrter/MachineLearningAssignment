@@ -4,5 +4,26 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_project/Scenes/MainMenu.unity
+    guid: f851c394370a1f544a3f7f84bbf77c94
+  - enabled: 1
+    path: Assets/_project/Scenes/LoadingScene.unity
+    guid: afa51b0dbe0849c4cbc20be3443f4110
+  - enabled: 1
+    path: Assets/_project/Scenes/Demonstration/TicTacToeDemo.unity
+    guid: df5e31d08e279a642ba35ef77fd44cf1
+  - enabled: 1
+    path: Assets/_project/Scenes/Demonstration/FlappyMusicDemo.unity
+    guid: db7e8ab341dd43347b610ed8d81135a8
+  - enabled: 1
+    path: Assets/_project/Scenes/Demonstration/HummingbirdDemo.unity
+    guid: 892502fc05a30464ebc90901e1755240
+  - enabled: 1
+    path: Assets/_project/Scenes/Demonstration/KartRacingDemo.unity
+    guid: bea87b0f97b3ed34894d678534106ee9
+  - enabled: 1
+    path: Assets/_project/Scenes/Demonstration/ShooterDemo.unity
+    guid: 6ba1f51437f923d47833c128bbe515fc
   m_configObjects: {}

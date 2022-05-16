@@ -97,6 +97,11 @@ public class UIController : MonoBehaviour
     /// <param name="nectarAmount">An amount between 0 and 1</param>
     public void SetPlayerNectar(float nectarAmount)
     {
+        if(!playerNectarBar)
+        {
+            return;
+        }
+
         playerNectarBar.value = nectarAmount;
     }
 
