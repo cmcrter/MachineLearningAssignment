@@ -32,8 +32,8 @@ public class StaticButtons : MonoBehaviour
 
     public static void LoadFlappyMusicScene()
     {
-        LoadingInformation.SceneToLoad = "FlappyMusicDemo";
-        LoadingInformation.scene = TypeOfScene.FlappyMusic;
+        LoadingInformation.SceneToLoad = "FlappyShipDemo";
+        LoadingInformation.scene = TypeOfScene.FlappyShip;
         SceneManager.LoadScene("LoadingScene");
     }
 

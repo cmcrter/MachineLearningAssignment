@@ -31,7 +31,7 @@ public class WorldMover : MonoBehaviour
     ObjectPool<PipeSet> PipeSetPool;
 
     [SerializeField]
-    private BirdMovement player;
+    private ShipMovement player;
     [SerializeField]
     private MLFlappyAgent agent;
 
@@ -167,7 +167,7 @@ public class WorldMover : MonoBehaviour
         PipeSetPool.Get();
     }
 
-    public void PlayerDied(BirdMovement movement)
+    public void PlayerDied(ShipMovement movement)
     {        
         if(Debug.isDebugBuild)
         {

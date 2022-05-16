@@ -75,7 +75,7 @@ public class LoadingScreen : MonoBehaviour
             case TypeOfScene.TicTacToe:
                 ShowSceneInfo(0);
                 break;
-            case TypeOfScene.FlappyMusic:
+            case TypeOfScene.FlappyShip:
                 ShowSceneInfo(1);
                 break;
             case TypeOfScene.KartRacing:

@@ -11,7 +11,7 @@ public enum TypeOfScene
 {
     MainMenu,
     TicTacToe,
-    FlappyMusic,
+    FlappyShip,
     KartRacing,
     Hummingbird,
     Shooter,

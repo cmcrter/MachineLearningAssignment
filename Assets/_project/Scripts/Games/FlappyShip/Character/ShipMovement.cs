@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////
-// File: BirdMovement.cs
+// File: ShipMovement.cs
 // Author: Charles Carter
 // Date Created: 08/03/22
 // Last Edited By: Charles Carter
@@ -9,7 +9,7 @@
 
 using UnityEngine;
 
-public class BirdMovement : MonoBehaviour
+public class ShipMovement : MonoBehaviour
 {
     #region Variables
 
