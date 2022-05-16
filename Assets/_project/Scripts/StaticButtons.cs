@@ -20,12 +20,12 @@ public class StaticButtons : MonoBehaviour
     public static void LoadScene(string sceneName)
     {
         LoadingInformation.SceneToLoad = sceneName;
-        SceneManager.LoadScene("LoadingScreen");
+        SceneManager.LoadScene("LoadingScene");
     }
 
     public static void MainMenu()
     {
         LoadingInformation.SceneToLoad = "MainMenu";
-        SceneManager.LoadScene("LoadingScreen");
+        SceneManager.LoadScene("LoadingScene");
     }
 }
