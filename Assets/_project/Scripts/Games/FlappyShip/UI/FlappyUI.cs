@@ -24,9 +24,6 @@ public class FlappyUI : MonoBehaviour
     private WorldMover mover;
 
     [SerializeField]
-    private GameObject pauseUI;
-
-    [SerializeField]
     private TextMeshProUGUI scoreText;
 
     [SerializeField]
@@ -35,24 +32,6 @@ public class FlappyUI : MonoBehaviour
     #endregion
 
     #region Public Methods
-
-    public void TogglePause()
-    {
-        if(pauseUI)
-        {
-            pauseUI.SetActive(!pauseUI.activeSelf);
-            Time.timeScale = pauseUI.activeSelf ? 0 : 1;
-        }
-    }
-
-    public void TogglePause(bool bOn)
-    {
-        if(pauseUI)
-        {
-            pauseUI.SetActive(bOn);
-            Time.timeScale = bOn ? 0 : 1;
-        }
-    }
 
     public void GameOverUISetValues(int score, FlappyGameResult result)
     {
@@ -74,8 +53,5 @@ public class FlappyUI : MonoBehaviour
         }
     }
 
-    #endregion
-
-    #region Private Methods
     #endregion
 }

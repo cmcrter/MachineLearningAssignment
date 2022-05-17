@@ -2,22 +2,58 @@
     "HummingBird": {
         "checkpoints": [
             {
-                "steps": 7320,
-                "file_path": "results\\HummingBird\\HummingBird\\HummingBird-7320.onnx",
-                "reward": -1.7142857142857142,
-                "creation_time": 1652729032.2394822,
+                "steps": 4999992,
+                "file_path": "results\\HummingBird\\HummingBird\\HummingBird-4999992.onnx",
+                "reward": 15.477225942071527,
+                "creation_time": 1652788710.8788285,
                 "auxillary_file_paths": [
-                    "results\\HummingBird\\HummingBird\\HummingBird-7320.pt"
+                    "results\\HummingBird\\HummingBird\\HummingBird-4999992.pt"
+                ]
+            },
+            {
+                "steps": 5491128,
+                "file_path": "results\\HummingBird\\HummingBird\\HummingBird-5491128.onnx",
+                "reward": null,
+                "creation_time": 1652789352.1475406,
+                "auxillary_file_paths": [
+                    "results\\HummingBird\\HummingBird\\HummingBird-5491128.pt"
+                ]
+            },
+            {
+                "steps": 5499960,
+                "file_path": "results\\HummingBird\\HummingBird\\HummingBird-5499960.onnx",
+                "reward": null,
+                "creation_time": 1652789800.8023412,
+                "auxillary_file_paths": [
+                    "results\\HummingBird\\HummingBird\\HummingBird-5499960.pt"
+                ]
+            },
+            {
+                "steps": 5999942,
+                "file_path": "results\\HummingBird\\HummingBird\\HummingBird-5999942.onnx",
+                "reward": 14.724851502312553,
+                "creation_time": 1652791451.45345,
+                "auxillary_file_paths": [
+                    "results\\HummingBird\\HummingBird\\HummingBird-5999942.pt"
+                ]
+            },
+            {
+                "steps": 6267342,
+                "file_path": "results\\HummingBird\\HummingBird\\HummingBird-6267342.onnx",
+                "reward": null,
+                "creation_time": 1652792444.309359,
+                "auxillary_file_paths": [
+                    "results\\HummingBird\\HummingBird\\HummingBird-6267342.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 7320,
+            "steps": 6267342,
             "file_path": "results\\HummingBird\\HummingBird.onnx",
-            "reward": -1.7142857142857142,
-            "creation_time": 1652729032.2394822,
+            "reward": null,
+            "creation_time": 1652792444.309359,
             "auxillary_file_paths": [
-                "results\\HummingBird\\HummingBird\\HummingBird-7320.pt"
+                "results\\HummingBird\\HummingBird\\HummingBird-6267342.pt"
             ]
         }
     },

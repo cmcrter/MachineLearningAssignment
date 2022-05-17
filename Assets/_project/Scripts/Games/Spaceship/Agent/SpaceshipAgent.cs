@@ -46,7 +46,7 @@ public class SpaceshipAgent : Agent
     private float smoothYawChange = 0f;
 
     // Maximum angle that the bird can pitch up or down
-    private const float MaxPitchAngle = 80f;
+    private const float MaxPitchAngle = 100;
 
     // Maximum distance from the beak tip to accept Information collision
     private const float BeakTipRadius = 0.008f;
@@ -310,7 +310,7 @@ public class SpaceshipAgent : Agent
             }
 
             // Check to see if the agent will collide with anything
-            Collider[] colliders = Physics.OverlapSphere(potentialPosition, 0.05f, ~computersLayer);
+            Collider[] colliders = Physics.OverlapSphere(potentialPosition, 0.02f, ~computersLayer);
 
             // Safe position has been found if no colliders are overlapped
             safePositionFound = colliders.Length == 0;
@@ -319,8 +319,8 @@ public class SpaceshipAgent : Agent
         Debug.Assert(safePositionFound, "Could not find a safe position to spawn");
 
         //Keep the position and rotation as the scene values
-        transform.position = new Vector3(0, 18f, 0);
-        transform.rotation = Quaternion.identity;
+        transform.position = potentialPosition;
+        transform.rotation = potentialRotation;
     }
 
     /// <summary>

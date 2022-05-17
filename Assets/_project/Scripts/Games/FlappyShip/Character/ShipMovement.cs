@@ -85,12 +85,6 @@ public class ShipMovement : MonoBehaviour
             //Call this instead of player died so there's no punishment
             manager.GameComplete();
         }
-
-        //Pause Menu Control
-        if(Input.GetKeyDown(KeyCode.P) && UI)
-        {
-            UI.TogglePause();
-        }
     }
 
     private void OnCollisionEnter(Collision collision)

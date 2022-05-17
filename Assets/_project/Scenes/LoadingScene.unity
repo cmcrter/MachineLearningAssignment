@@ -715,16 +715,16 @@ MonoBehaviour:
   info:
   - Title: Tic Tac Toe
     Description: The classic game of Tic Tac Toe vs an AI
-    SceneSprite: {fileID: 0}
-  - Title: Flappy Music
+    SceneSprite: {fileID: 21300000, guid: 5acf30dab1e76de49acde7d05326d598, type: 3}
+  - Title: Flappy Ships
     Description: Keep yourself in the air and survive longer than the AI
-    SceneSprite: {fileID: 0}
+    SceneSprite: {fileID: 21300000, guid: 2d13093a4ed6068429e1228febba99d5, type: 3}
   - Title: Kart Racing
     Description: Place amounts on which car you think will win!
-    SceneSprite: {fileID: 0}
+    SceneSprite: {fileID: 21300000, guid: 98cebc7061a4264499cd95ef327f343c, type: 3}
   - Title: Spaceship
     Description: A race to collect information againt an opponent craft!
-    SceneSprite: {fileID: 0}
+    SceneSprite: {fileID: 21300000, guid: c478f92747766944f84ada33dc5f8ede, type: 3}
   - Title: Shooter
     Description: 
     SceneSprite: {fileID: 0}

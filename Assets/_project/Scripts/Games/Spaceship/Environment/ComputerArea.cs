@@ -51,6 +51,11 @@ public class ComputerArea : MonoBehaviour
         foreach (Computer computers in Computers)
         {
             computers.Resetcomputers();
+
+            float randX = Random.Range(colliderToPutRandComputers.bounds.min.x, colliderToPutRandComputers.bounds.max.x);
+            float randZ = Random.Range(colliderToPutRandComputers.bounds.min.z, colliderToPutRandComputers.bounds.max.z);
+
+            computers.transform.position = new Vector3(randX, computers.transform.position.y, randZ);
         }
     }
 
