@@ -112,6 +112,7 @@ public class LoadingScreen : MonoBehaviour
         descriptionText.text = info[infoIndex].Description;
 
         sceneImage.sprite = info[infoIndex].SceneSprite;
+        sceneImage.preserveAspect = true;
     }
 
     private IEnumerator Co_FadeText()
