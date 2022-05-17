@@ -3,11 +3,12 @@
 // Author: Charles Carter
 // Date Created: 30/09/21
 // Last Edited By: Charles Carter
-// Date Last Edited: 22/02/22
+// Date Last Edited: 17/05/22
 // Brief: A POCO script to handle timer floats
 //////////////////////////////////////////////////////////// 
 
 using System;
+using UnityEngine;
 
 //A class not attached to unity to handle the timer float
 [Serializable]
@@ -79,6 +80,15 @@ public class Timer
             current_time = 0;
             isActive = false;
         }
+    }
+
+    //Function to return a time given in minutes and seconds
+    public static (float, float) TimerFormatter(float time)
+    {
+        float minutes = Mathf.Floor(time / 60);
+        float seconds = Mathf.Floor(time % 60);
+
+        return (minutes, seconds);
     }
 
     #endregion

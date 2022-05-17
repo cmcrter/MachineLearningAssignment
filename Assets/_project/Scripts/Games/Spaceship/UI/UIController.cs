@@ -40,10 +40,10 @@ public class UIController : MonoBehaviour
     /// <param name="timeRemaining">The time remaining in seconds</param>
     public void SetTimer(float timeRemaining)
     {
-        if (timeRemaining > 0f)
-            timerText.text = timeRemaining.ToString("00");
-        else
-            timerText.text = "";
+        //Returns the timer in minutes/seconds
+        (float, float) timerVal = Timer.TimerFormatter(timeRemaining);
+
+        timerText.text = timerVal.Item1.ToString("00") + ":" + timerVal.Item2.ToString("00");
     }
 
     /// <summary>

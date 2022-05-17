@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
+    [Header("General Game Information")]
     [Tooltip("Game ends when an agent collects this much Information")]
     public float maxInformation = 8f;
 
@@ -29,6 +30,13 @@ public class GameManager : MonoBehaviour
 
     private Timer gameTimer;
     private float gameDuration = 90f;
+
+    [Header("Sounds Needed")]
+    [SerializeField]
+    SoundDetails informationGathered;
+
+    [SerializeField]
+    SoundDetails timerOver;
 
     /// <summary>
     /// Gets the time remaining in the game

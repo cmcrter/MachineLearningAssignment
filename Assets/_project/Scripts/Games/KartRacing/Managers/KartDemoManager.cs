@@ -165,10 +165,10 @@ public class KartDemoManager : MonoBehaviour
             return;
         }
 
-        float minutes = Mathf.Floor(timer.current_time / 60);
-        float seconds = Mathf.Floor(timer.current_time % 60);
+        //Returns the timer in minutes/seconds
+        (float, float) timerVal = Timer.TimerFormatter(timer.current_time);
 
-        text.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+        text.text = timerVal.Item1.ToString("00") + ":" + timerVal.Item2.ToString("00");
     }
 
     private void SetupRace()

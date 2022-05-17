@@ -9,6 +9,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 //A class to hold necessary scene sounds
 [System.Serializable]
@@ -38,6 +39,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private List<SoundDetails> sceneSoundsToPlay = new List<SoundDetails>();
 
+    [SerializeField]
+    private AudioMixerGroup masterMixer;
+
     #endregion
 
     #region Unity Methods
@@ -56,9 +60,11 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
+        //Going through all of the predetermined sounds to play at the start
         foreach(SoundDetails sound in sceneSoundsToPlay)
         {
             AudioSource source = gameObject.AddComponent<AudioSource>();
+            source.outputAudioMixerGroup = masterMixer;
             source.clip = sound.clip;
             source.volume = sound.volume;
             source.loop = sound.looping;
@@ -74,6 +80,11 @@ public class SoundManager : MonoBehaviour
     {
         sfxSource.clip = sound;
         sfxSource.Play();
+    }
+
+    public void PlaySFX(AudioClip sound, float volume)
+    {
+        sfxSource.PlayOneShot(sound, volume);
     }
 
     public void PlayButtonClick()

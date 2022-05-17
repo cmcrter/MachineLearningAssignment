@@ -15427,6 +15427,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3523915467142373277, guid: 17901c367a5c02d419d1262ed61be69b, type: 3}
   m_PrefabInstance: {fileID: 942545234}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &953940354
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2525186369421818192, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: sceneSoundsToPlay.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525186369421818192, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: sceneSoundsToPlay.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 90ee3982d59563b45b416bfec26c3ff5, type: 3}
+    - target: {fileID: 2525186369421818192, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: sceneSoundsToPlay.Array.data[0].volume
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525186369421818192, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: sceneSoundsToPlay.Array.data[0].looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525186369421818193, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525186369421818193, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525186369421818193, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525186369421818193, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525186369421818193, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525186369421818193, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525186369421818193, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525186369421818193, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525186369421818193, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525186369421818193, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525186369421818193, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525186369421818199, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
 --- !u!1001 &958651511
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26385,7 +26458,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1222615675}
         m_TargetAssemblyTypeName: StaticButtons, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -29163,7 +29236,7 @@ Transform:
   m_Children:
   - {fileID: 916249673}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &1785328154
 MonoBehaviour:
@@ -29194,7 +29267,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7773019, y: 1}
+    m_SensorSize: {x: 1.778098, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -31013,7 +31086,7 @@ Transform:
   - {fileID: 564748317}
   - {fileID: 698649316}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1889070557
 MonoBehaviour:
@@ -32348,7 +32421,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

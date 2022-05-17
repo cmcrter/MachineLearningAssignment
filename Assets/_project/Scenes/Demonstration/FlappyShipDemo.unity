@@ -1846,7 +1846,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2525186369421818192, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
       propertyPath: sceneSoundsToPlay.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2525186369421818192, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
       propertyPath: sceneSoundsToPlay.Array.data[0]
@@ -1857,11 +1857,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 6f2d43b185a022249bab826950b71b5b, type: 3}
     - target: {fileID: 2525186369421818192, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: sceneSoundsToPlay.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1540c2193491beb4daa168195bd90b2f, type: 3}
+    - target: {fileID: 2525186369421818192, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
       propertyPath: sceneSoundsToPlay.Array.data[0].volume
       value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 2525186369421818192, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: sceneSoundsToPlay.Array.data[1].volume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525186369421818192, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
       propertyPath: sceneSoundsToPlay.Array.data[0].looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525186369421818192, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
+      propertyPath: sceneSoundsToPlay.Array.data[1].looping
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2525186369421818193, guid: 36a274bff3b3a924396ee0cb521a75e8, type: 3}
