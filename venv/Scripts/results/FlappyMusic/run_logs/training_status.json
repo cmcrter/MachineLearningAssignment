@@ -2,15 +2,6 @@
     "FlappyMusic": {
         "checkpoints": [
             {
-                "steps": 2499988,
-                "file_path": "results\\FlappyMusic\\FlappyMusic\\FlappyMusic-2499988.onnx",
-                "reward": null,
-                "creation_time": 1646829090.0847874,
-                "auxillary_file_paths": [
-                    "results\\FlappyMusic\\FlappyMusic\\FlappyMusic-2499988.pt"
-                ]
-            },
-            {
                 "steps": 2999950,
                 "file_path": "results\\FlappyMusic\\FlappyMusic\\FlappyMusic-2999950.onnx",
                 "reward": 97.73999357223511,
@@ -45,15 +36,24 @@
                 "auxillary_file_paths": [
                     "results\\FlappyMusic\\FlappyMusic\\FlappyMusic-4158687.pt"
                 ]
+            },
+            {
+                "steps": 4305128,
+                "file_path": "results\\FlappyMusic\\FlappyMusic\\FlappyMusic-4305128.onnx",
+                "reward": null,
+                "creation_time": 1652868879.2097325,
+                "auxillary_file_paths": [
+                    "results\\FlappyMusic\\FlappyMusic\\FlappyMusic-4305128.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 4158687,
+            "steps": 4305128,
             "file_path": "results\\FlappyMusic\\FlappyMusic.onnx",
-            "reward": 613.6199634075165,
-            "creation_time": 1646830671.3174589,
+            "reward": null,
+            "creation_time": 1652868879.2097325,
             "auxillary_file_paths": [
-                "results\\FlappyMusic\\FlappyMusic\\FlappyMusic-4158687.pt"
+                "results\\FlappyMusic\\FlappyMusic\\FlappyMusic-4305128.pt"
             ]
         }
     },

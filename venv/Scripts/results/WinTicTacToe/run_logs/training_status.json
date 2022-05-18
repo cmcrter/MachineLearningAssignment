@@ -1,25 +1,7 @@
 {
     "WinTicTacToe": {
-        "elo": 5114.68423188408,
+        "elo": 5320.015727927686,
         "checkpoints": [
-            {
-                "steps": 62206,
-                "file_path": "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-62206.onnx",
-                "reward": 0.0037174721189591076,
-                "creation_time": 1652806889.1397018,
-                "auxillary_file_paths": [
-                    "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-62206.pt"
-                ]
-            },
-            {
-                "steps": 90411,
-                "file_path": "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-90411.onnx",
-                "reward": 0.08946322067594434,
-                "creation_time": 1652808030.474383,
-                "auxillary_file_paths": [
-                    "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-90411.pt"
-                ]
-            },
             {
                 "steps": 153065,
                 "file_path": "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-153065.onnx",
@@ -46,15 +28,33 @@
                 "auxillary_file_paths": [
                     "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-180530.pt"
                 ]
+            },
+            {
+                "steps": 0,
+                "file_path": "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-0.onnx",
+                "reward": null,
+                "creation_time": 1652868261.4798136,
+                "auxillary_file_paths": [
+                    "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-0.pt"
+                ]
+            },
+            {
+                "steps": 6745,
+                "file_path": "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-6745.onnx",
+                "reward": 0.125,
+                "creation_time": 1652868448.6147418,
+                "auxillary_file_paths": [
+                    "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-6745.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 180530,
+            "steps": 6745,
             "file_path": "results\\WinTicTacToe\\WinTicTacToe.onnx",
-            "reward": 0.3219814241486068,
-            "creation_time": 1652811300.1793654,
+            "reward": 0.125,
+            "creation_time": 1652868448.6147418,
             "auxillary_file_paths": [
-                "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-180530.pt"
+                "results\\WinTicTacToe\\WinTicTacToe\\WinTicTacToe-6745.pt"
             ]
         }
     },

@@ -1,60 +1,24 @@
 {
     "Shooter": {
+        "elo": 798.0086179957033,
         "checkpoints": [
             {
-                "steps": 3499977,
-                "file_path": "results\\Shooter\\Shooter\\Shooter-3499977.onnx",
-                "reward": -2.0,
-                "creation_time": 1652500302.8057978,
-                "auxillary_file_paths": [
-                    "results\\Shooter\\Shooter\\Shooter-3499977.pt"
-                ]
-            },
-            {
-                "steps": 3999998,
-                "file_path": "results\\Shooter\\Shooter\\Shooter-3999998.onnx",
+                "steps": 13393,
+                "file_path": "results\\Shooter\\Shooter\\Shooter-13393.onnx",
                 "reward": null,
-                "creation_time": 1652504515.170215,
+                "creation_time": 1652869554.2582324,
                 "auxillary_file_paths": [
-                    "results\\Shooter\\Shooter\\Shooter-3999998.pt"
-                ]
-            },
-            {
-                "steps": 4499989,
-                "file_path": "results\\Shooter\\Shooter\\Shooter-4499989.onnx",
-                "reward": -2.0,
-                "creation_time": 1652508671.0296502,
-                "auxillary_file_paths": [
-                    "results\\Shooter\\Shooter\\Shooter-4499989.pt"
-                ]
-            },
-            {
-                "steps": 4999978,
-                "file_path": "results\\Shooter\\Shooter\\Shooter-4999978.onnx",
-                "reward": -2.0,
-                "creation_time": 1652512811.4995937,
-                "auxillary_file_paths": [
-                    "results\\Shooter\\Shooter\\Shooter-4999978.pt"
-                ]
-            },
-            {
-                "steps": 5417284,
-                "file_path": "results\\Shooter\\Shooter\\Shooter-5417284.onnx",
-                "reward": null,
-                "creation_time": 1652516278.6039011,
-                "auxillary_file_paths": [
-                    "results\\Shooter\\Shooter\\Shooter-5417284.pt"
+                    "results\\Shooter\\Shooter\\Shooter-13393.pt"
                 ]
             }
         ],
-        "elo": 509.07112508619235,
         "final_checkpoint": {
-            "steps": 5417284,
+            "steps": 13393,
             "file_path": "results\\Shooter\\Shooter.onnx",
             "reward": null,
-            "creation_time": 1652516278.6039011,
+            "creation_time": 1652869554.2582324,
             "auxillary_file_paths": [
-                "results\\Shooter\\Shooter\\Shooter-5417284.pt"
+                "results\\Shooter\\Shooter\\Shooter-13393.pt"
             ]
         }
     },

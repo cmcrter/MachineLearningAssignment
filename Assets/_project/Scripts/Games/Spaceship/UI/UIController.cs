@@ -66,6 +66,11 @@ public class UIController : MonoBehaviour
     /// <param name="InformationAmount">An amount between 0 and 1</param>
     public void SetOpponentInformation(float InformationAmount)
     {
+        if(!opponentInformationBar)
+        {
+            return;
+        }
+
         opponentInformationBar.value = InformationAmount;
     }
 }
